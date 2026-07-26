@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en-IN" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Avelour (bloomora.global) - Discover the Future of Shopping. Ultra-luxurious bespoke products, fashion, electronics, home decor, and organic beauty.">
+    <meta name="keywords" content="Avelour, bloomora.global, luxury e-commerce, high fashion, premium electronics, organic beauty, luxury scents">
+    <meta name="author" content="Avelour Inc. (bloomora.global)">
+    <title>Avelour | The Future of Shopping — bloomora.global</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@1,400;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <!-- Custom Glowing Cursor -->
+    <div class="cursor-glow" id="cursor-glow"></div>
+    <div class="cursor-dot" id="cursor-dot"></div>
+
+    <!-- Top Announcement & Settings Bar -->
+    <div class="announcement-bar">
+        <div class="container announcement-content">
+            <div class="announcement-text">
+                <span class="badge-flash">FLASH SALE</span>
+                <span>Exclusive 20% off all luxury collections with code <strong class="code-highlight">AVELOUR20</strong></span>
+                <div class="countdown-timer" id="flash-countdown">
+                    <span id="cd-hours">04</span>h : <span id="cd-mins">32</span>m : <span id="cd-secs">18</span>s
+                </div>
+            </div>
+            <div class="announcement-controls">
+                <!-- Currency Selector -->
+                <select id="curr-select" class="meta-select" aria-label="Select Currency">
+                    <option value="INR" selected>₹ INR</option>
+                    <option value="USD">$ USD</option>
+                    <option value="EUR">€ EUR</option>
+                    <option value="GBP">£ GBP</option>
+                    <option value="JPY">¥ JPY</option>
+                </select>
+                <!-- Language Selector -->
+                <select id="lang-select" class="meta-select" aria-label="Select Language">
+                    <option value="EN-IN" selected>🇮🇳 English (India)</option>
+                    <option value="EN">🇺🇸 EN (US)</option>
+                    <option value="UK">🇬🇧 EN (UK)</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="header" id="header">
+        <div class="container nav-container">
+            <!-- Brand Logo -->
+            <a href="#" class="logo" aria-label="Avelour Home">
+                <span class="logo-icon">❖</span> Avelour <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 400; margin-left: 4px;">bloomora.global</span>
+            </a>
+            
+            <!-- Navigation Menu -->
+            <nav class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="#hero" class="nav-link active">Home</a></li>
+                    <li><a href="#categories" class="nav-link">Categories</a></li>
+                    <li><a href="#featured" class="nav-link">Featured</a></li>
+                    <li><a href="#trending" class="nav-link">Trending</a></li>
+                    <li><a href="#new-arrivals" class="nav-link">New Arrivals</a></li>
+                    <li><a href="#why-us" class="nav-link">Why Avelour</a></li>
+                </ul>
+            </nav>
+
+            <!-- Navigation Controls -->
+            <div class="nav-actions">
+                <!-- AI Search Button -->
+                <button id="search-btn" class="action-btn" aria-label="Open AI Search" title="AI Search (Ctrl + K)">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </button>
+
+                <!-- Wishlist Button -->
+                <button id="wishlist-btn" class="action-btn" aria-label="View Wishlist" title="Wishlist">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    <span id="wishlist-count" class="badge-count">0</span>
+                </button>
+
+                <!-- Cart Button -->
+                <button id="cart-toggle" class="action-btn cart-btn-glow" aria-label="Open Shopping Cart" title="Shopping Cart">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    <span id="cart-count" class="badge-count">0</span>
+                </button>
+
+                <!-- Auth / Profile Button -->
+                <button id="auth-btn" class="action-btn" aria-label="Account Login" title="User Account">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </button>
+
+                <!-- Mobile Menu Toggle -->
+                <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-label="Toggle Menu">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <!-- Canvas Particle Background -->
+            <canvas id="particle-canvas" class="hero-particles"></canvas>
+            
+            <!-- Video Background Stream -->
+            <div class="video-bg-container">
+                <video id="hero-video" class="hero-video" autoplay loop muted playsinline poster="assets/hero_perfume.jpg">
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-fashion-model-in-a-pink-and-purple-environment-41584-large.mp4" type="video/mp4">
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="pill-tag magnetic-elem">
+                        <span class="dot-pulse"></span> THE ATELIER COLLECTION • EST. 2026
+                    </div>
+                    
+                    <h1 class="hero-title reveal-text gradient-text glow-text-shimmer">
+                        Welcome to the House of Bloomora Global
+                    </h1>
+                    
+                    <p class="hero-subheadline">
+                        Bespoke fragrances, haute couture fashion, and high-precision craftsmanship. Experience luxury curation crafted for the world's most discerning connoisseurs.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="#featured" class="btn btn-primary magnetic-btn ripple-btn">
+                            <span>Shop Now</span>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </a>
+                        <a href="#categories" class="btn btn-glass magnetic-btn">
+                            <span>Explore Collection</span>
+                        </a>
+                    </div>
+
+                    <!-- Animated Ticker Counters -->
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-num" data-target="150000">150K+</span>
+                            <span class="stat-label">Happy Global Clients</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-num" data-target="4.9">4.9/5</span>
+                            <span class="stat-label">Verified Excellence</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-num" data-target="24">24h</span>
+                            <span class="stat-label">Express Global Delivery</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating 3D Card Glass Mockup -->
+                <div class="hero-visual">
+                    <div class="card-3d-wrapper" id="hero-card-3d">
+                        <div class="card-3d-inner glass-card">
+                            <div class="card-badge">Featured Icon</div>
+                            <img src="assets/fashion.jpg" alt="Avelour Signature Item" class="card-3d-img">
+                            <div class="card-3d-details">
+                                <h3>Velvet Aura Haute Dress</h3>
+                                <div class="card-price-row">
+                                    <span class="card-price">$295.00</span>
+                                    <span class="card-rating">★ 4.9 (128)</span>
+                                </div>
+                                <button class="btn btn-sm btn-primary add-hero-cart" data-id="p1">Quick Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Scent Metaphor: The Unspoken Signature -->
+        <section id="scent-metaphor" class="section alchemy-section bg-surface">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">The Poetry of Fragrance</span>
+                    <h2 class="section-title">A Scent is an <span class="gradient-text glow-text-shimmer">Unspoken Signature</span></h2>
+                    <p class="section-desc">Like a musical chord, luxury fragrance moves through time in three harmonious movements.</p>
+                </div>
+
+                <div class="alchemy-interactive-wrapper glass-card">
+                    <div class="alchemy-notes-pyramid">
+                        <div class="alchemy-layer-card active" data-layer="top" id="layer-top">
+                            <div class="layer-header">
+                                <span class="layer-badge">01 • THE FIRST SPARK</span>
+                                <h4>Top Notes (0 - 30 Minutes)</h4>
+                            </div>
+                            <p>Zesty Calabrian Bergamot & Ocean Mist. The radiant opening spark that awakens the room.</p>
+                        </div>
+
+                        <div class="alchemy-layer-card" data-layer="heart" id="layer-heart">
+                            <div class="layer-header">
+                                <span class="layer-badge">02 • THE SOUL ACCORD</span>
+                                <h4>Heart Notes (30 Mins - 4 Hours)</h4>
+                            </div>
+                            <p>Damask Rose & Midnight Jasmine. The emotional heart that defines your presence.</p>
+                        </div>
+
+                        <div class="alchemy-layer-card" data-layer="base" id="layer-base">
+                            <div class="layer-header">
+                                <span class="layer-badge">03 • THE ANCHOR MEMORY</span>
+                                <h4>Base Notes (4 Hours - 48+ Hours)</h4>
+                            </div>
+                            <p>Smoked Cambodian Oud & Royal Amber. The lingering impression that stays long after you leave.</p>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Interactive Aura Sphere Visualizer -->
+                    <div class="alchemy-aura-visualizer">
+                        <canvas id="aura-canvas" width="340" height="340"></canvas>
+                        <div class="aura-center-label" id="aura-label">
+                            <span id="aura-note-title" style="font-size: 0.8rem; color: var(--secondary); letter-spacing: 2px; text-transform: uppercase; font-weight: 700;">Top Accord</span>
+                            <strong id="aura-note-name" style="font-size: 1.2rem; display: block; margin: 4px 0; color: #FFFFFF;">Calabrian Bergamot</strong>
+                            <span id="aura-note-desc" style="font-size: 0.85rem; color: var(--accent); font-weight: 600;">Sparkling • Zesty • Vibrant</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Categories -->
+        <section id="categories" class="section categories-section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Curated Realms</span>
+                    <h2 class="section-title">Featured Categories</h2>
+                    <p class="section-desc">Immerse yourself in our meticulously designed luxury spheres</p>
+                </div>
+
+                <div class="categories-grid categories-3-col">
+                    <div class="category-card glass-card" data-category="men-perfume">
+                        <img src="assets/men_perfume.jpg" alt="Men's Perfume Category" loading="lazy">
+                        <div class="category-overlay">
+                            <span class="cat-tag">Smoked Agarwood & Leather</span>
+                            <h3>Men's Perfume</h3>
+                            <p>Bold colognes, aged tobacco & amber stone</p>
+                            <span class="cat-arrow">Explore Collection &rarr;</span>
+                        </div>
+                    </div>
+
+                    <div class="category-card glass-card" data-category="women-perfume">
+                        <img src="assets/women_perfume.jpg" alt="Women's Perfume Category" loading="lazy">
+                        <div class="category-overlay">
+                            <span class="cat-tag">Damask Rose & Midnight Jasmine</span>
+                            <h3>Women's Perfume</h3>
+                            <p>Pure floral elixirs, vanilla & cashmere wood</p>
+                            <span class="cat-arrow">Explore Collection &rarr;</span>
+                        </div>
+                    </div>
+
+                    <div class="category-card glass-card" data-category="unisex-perfume">
+                        <img src="assets/unisex_perfume.jpg" alt="Unisex Perfume Category" loading="lazy">
+                        <div class="category-overlay">
+                            <span class="cat-tag">Universal Botanical Accord</span>
+                            <h3>Unisex Perfume</h3>
+                            <p>Bespoke amber, fresh citrus & sandalwood</p>
+                            <span class="cat-arrow">Explore Collection &rarr;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section id="featured" class="section products-section">
+            <div class="container">
+                <div class="section-header-flex">
+                    <div>
+                        <span class="section-subtitle">Exquisite Selection</span>
+                        <h2 class="section-title">Featured Scents</h2>
+                    </div>
+
+                    <!-- Category Filter Tabs (3 Perfume Categories Only) -->
+                    <div class="filter-tabs" id="product-filters">
+                        <button class="filter-btn active" data-filter="all">All Scents</button>
+                        <button class="filter-btn" data-filter="men-perfume">👔 Men's Perfume</button>
+                        <button class="filter-btn" data-filter="women-perfume">🌸 Women's Perfume</button>
+                        <button class="filter-btn" data-filter="unisex-perfume">✨ Unisex Perfume</button>
+                    </div>
+                </div>
+
+                <!-- Product Grid -->
+                <div class="product-grid" id="product-grid">
+                    <!-- Dynamic rendering in app.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Trending Products Carousel -->
+        <section id="trending" class="section trending-section bg-surface">
+            <div class="container">
+                <div class="section-header-flex">
+                    <div>
+                        <span class="section-subtitle">Viral Essentials</span>
+                        <h2 class="section-title">Trending Now</h2>
+                    </div>
+                    <div class="carousel-nav">
+                        <button id="carousel-prev" class="carousel-btn" aria-label="Previous">&larr;</button>
+                        <button id="carousel-next" class="carousel-btn" aria-label="Next">&rarr;</button>
+                    </div>
+                </div>
+
+                <div class="carousel-viewport" id="trending-carousel">
+                    <div class="carousel-track" id="trending-track">
+                        <!-- Dynamic items rendered in app.js -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Best Sellers Showcase -->
+        <section id="best-sellers" class="section best-sellers-section">
+            <div class="container">
+                <div class="showcase-banner glass-card">
+                    <div class="showcase-visual">
+                        <img src="assets/men_perfume.jpg" alt="Obsidian Oud Noir" id="showcase-img">
+                        <span class="badge-accent">Best Seller #1</span>
+                    </div>
+                    <div class="showcase-info">
+                        <span class="showcase-tag">Hallmark of Luxury</span>
+                        <h2 class="showcase-title">Obsidian Oud Noir Eau de Parfum</h2>
+                        <p class="showcase-desc">Smoked Cambodian agarwood masterfully blended with Tuscan black leather, royal amber stone, and French vanilla extract for an intense, unforgettable sillage.</p>
+                        
+                        <div class="showcase-specs">
+                            <div class="spec-box">
+                                <span class="spec-val">Agarwood</span>
+                                <span class="spec-key">Base Accord</span>
+                            </div>
+                            <div class="spec-box">
+                                <span class="spec-val">Extrait</span>
+                                <span class="spec-key">Concentration</span>
+                            </div>
+                            <div class="spec-box">
+                                <span class="spec-val">48+ Hours</span>
+                                <span class="spec-key">Scent Longevity</span>
+                            </div>
+                        </div>
+
+                        <div class="showcase-price-row">
+                            <span class="showcase-price" id="bestseller-price">$240.00</span>
+                            <button class="btn btn-primary magnetic-btn quick-view-btn" data-id="pm1">Quick View & 360°</button>
+                            <button class="btn btn-outline add-to-cart-btn" data-id="pm1">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Arrivals -->
+        <section id="new-arrivals" class="section new-arrivals-section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Fresh Arrivals</span>
+                    <h2 class="section-title">New Arrivals</h2>
+                    <p class="section-desc">Unveiling our newest artisan drops and limited releases</p>
+                </div>
+
+                <div class="product-grid" id="new-arrivals-grid">
+                    <!-- Dynamic rendering in app.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Avelour -->
+        <section id="why-us" class="section why-us-section bg-surface">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">The Avelour Difference</span>
+                    <h2 class="section-title">Why Choose Avelour</h2>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card glass-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                        </div>
+                        <h3>Complimentary Express Shipping</h3>
+                        <p>Global carbon-neutral express delivery on all orders above $100.</p>
+                    </div>
+
+                    <div class="feature-card glass-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        </div>
+                        <h3>Encrypted Payments</h3>
+                        <p>Military-grade SSL security with instant Apple Pay, Stripe & Paypal.</p>
+                    </div>
+
+                    <div class="feature-card glass-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <h3>Master Craftsman Quality</h3>
+                        <p>Sourced from certified organic botanicals and world-renowned ateliers.</p>
+                    </div>
+
+                    <div class="feature-card glass-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        </div>
+                        <h3>24/7 VIP Concierge</h3>
+                        <p>Dedicated personal styling & shopping concierge available anytime.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customer Testimonials -->
+        <section id="testimonials" class="section testimonials-section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Client Praise</span>
+                    <h2 class="section-title">What Connoisseurs Say</h2>
+                </div>
+
+                <div class="testimonials-grid">
+                    <div class="testimonial-card glass-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">"Avelour (bloomora.global) has completely raised the bar for luxury e-commerce. The Velvet Aura dress fit like a dream, and the interactive 360 viewer showed exact stitching details."</p>
+                        <div class="testimonial-author">
+                            <div class="avatar">EB</div>
+                            <div>
+                                <h4>Elena Rostova</h4>
+                                <span>Verified Buyer — Paris, France</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card glass-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">"The bespoke scents and wireless obsidian headphones are absolute art pieces. Customer service resolved my shipping query in under 3 minutes."</p>
+                        <div class="testimonial-author">
+                            <div class="avatar">MK</div>
+                            <div>
+                                <h4>Marcus Vance</h4>
+                                <span>Verified Buyer — New York, USA</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card glass-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">"From the cinematic video hero to the effortless multi-step checkout, every single click feels like visiting a 5-star boutique on Fifth Avenue."</p>
+                        <div class="testimonial-author">
+                            <div class="avatar">SJ</div>
+                            <div>
+                                <h4>Sophia Takahashi</h4>
+                                <span>Verified Buyer — Tokyo, Japan</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Subscription -->
+        <section id="newsletter" class="section newsletter-section">
+            <div class="container">
+                <div class="newsletter-card glass-card text-center">
+                    <span class="pill-tag">VIP Society</span>
+                    <h2 class="newsletter-title">Unlock Private Atelier Access</h2>
+                    <p class="newsletter-desc">Subscribe to receive invitation-only previews, secret drop notifications, and 15% off your first luxury order.</p>
+
+                    <form id="newsletter-form" class="newsletter-form">
+                        <div class="input-group">
+                            <input type="email" id="newsletter-email" placeholder="Enter your email address" required>
+                            <button type="submit" class="btn btn-primary magnetic-btn">Join Society</button>
+                        </div>
+                    </form>
+                    <p id="newsletter-status" class="status-msg"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-col brand-col">
+                <a href="#" class="logo footer-logo">
+                    <span class="logo-icon">❖</span> Avelour
+                </a>
+                <span style="display: block; font-size: 0.85rem; color: var(--accent); margin-bottom: 8px;">bloomora.global</span>
+                <p class="footer-desc">Redefining luxury shopping through digital craftsmanship, organic botanicals, and bespoke technology.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram">IG</a>
+                    <a href="#" aria-label="Twitter">TW</a>
+                    <a href="#" aria-label="TikTok">TK</a>
+                    <a href="#" aria-label="YouTube">YT</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Fragrance Collections</h4>
+                <ul>
+                    <li><a href="#featured">👔 Men's Perfumes</a></li>
+                    <li><a href="#featured">🌸 Women's Perfumes</a></li>
+                    <li><a href="#featured">✨ Unisex Perfumes</a></li>
+                    <li><a href="#featured">Bespoke Atelier Scents</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Boutique</h4>
+                <ul>
+                    <li><a href="#why-us">About Avelour</a></li>
+                    <li><a href="#testimonials">Client Praise</a></li>
+                    <li><a href="#" id="open-dashboard-link">User Dashboard</a></li>
+                    <li><a href="#why-us">Sustainability</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Assistance</h4>
+                <ul>
+                    <li>
+                        <a href="https://wa.me/919149372043?text=Hello%20Avelour%20VIP%20Service%20Department!%20I%20need%20assistance%20with%20my%20order." target="_blank" rel="noopener" style="color: #25D366; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+                            <svg viewBox="0 0 32 32" width="16" height="16" fill="#25D366"><path d="M16 2a13 13 0 0 0-11 20L3 29l7.3-1.9A13 13 0 1 0 16 2zm0 23.8a10.8 10.8 0 0 1-5.5-1.5l-.4-.2-4.1 1.1 1.1-4-.3-.4A10.8 10.8 0 1 1 16 25.8zm6-8.1c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.7.2s-.8 1-1 1.2c-.2.2-.4.2-.7 0a9 9 0 0 1-2.6-1.6 10 10 0 0 1-1.8-2.2c-.2-.3 0-.5.1-.7l.5-.6c.1-.2.2-.4.3-.5.1-.2.1-.3 0-.5s-.7-1.7-1-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4s-1.2 1.2-1.2 2.8 1.2 3.2 1.4 3.4c.2.3 2.4 3.7 5.9 5.2 3.5 1.5 3.5 1 4.1 1 .6 0 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6z"/></svg>
+                            <span>WhatsApp</span>
+                        </a>
+                    </li>
+                    <li><a href="#" id="footer-chat-trigger">Live AI Concierge</a></li>
+                    <li><a href="#">Global Shipping & Returns</a></li>
+                    <li><a href="#">Order Tracking</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom text-center">
+            <p>&copy; 2026 Avelour Inc. (<a href="https://bloomora.global" style="color: var(--secondary); text-decoration: none;">bloomora.global</a>). All rights reserved. Designed for ultra-luxury performance.</p>
+        </div>
+    </footer>
+
+    <!-- ==========================================================================
+         MODALS & OVERLAYS
+         ========================================================================== -->
+
+    <!-- AI Search Overlay Modal -->
+    <div id="search-modal" class="modal" role="dialog" aria-modal="true" aria-label="Search Modal">
+        <div class="modal-backdrop" id="search-backdrop"></div>
+        <div class="modal-content search-modal-content glass-card">
+            <div class="search-header-input">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="ai-search-input" placeholder="Ask AI Stylist or type product name..." autocomplete="off">
+                <button id="voice-search-btn" class="icon-btn" title="Voice Search Simulation">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                </button>
+                <button class="modal-close" id="close-search-btn">&times;</button>
+            </div>
+
+            <div class="search-body">
+                <div class="trending-tags">
+                    <span>Trending Searches:</span>
+                    <button class="tag-btn" data-search="Oud">Obsidian Oud</button>
+                    <button class="tag-btn" data-search="Rose">Rose Royale</button>
+                    <button class="tag-btn" data-search="Jasmine">Jasmine Elixir</button>
+                    <button class="tag-btn" data-search="Amber">Velvet Amber</button>
+                </div>
+                <div class="search-results-grid" id="search-results-grid">
+                    <!-- Live Search Results -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Quick View & 360° Turntable Modal -->
+    <div id="quickview-modal" class="modal" role="dialog" aria-modal="true">
+        <div class="modal-backdrop" id="quickview-backdrop"></div>
+        <div class="modal-content quickview-content glass-card">
+            <button class="modal-close" id="close-quickview">&times;</button>
+            <div class="quickview-grid">
+                <!-- Visual Gallery & 360 Turntable -->
+                <div class="quickview-visual">
+                    <div class="turntable-container">
+                        <canvas id="turntable-canvas" width="450" height="450"></canvas>
+                        <div class="turntable-hint">Drag horizontally to rotate 360°</div>
+                    </div>
+                </div>
+
+                <!-- Product Specifications & Buy Form -->
+                <div class="quickview-details">
+                    <span class="badge-tag" id="qv-category">Category</span>
+                    <h2 id="qv-title">Product Title</h2>
+                    <div class="qv-price-row">
+                        <span class="qv-price" id="qv-price">$0.00</span>
+                        <span class="qv-rating" id="qv-rating">★ 4.9 (84 reviews)</span>
+                    </div>
+                    <p class="qv-desc" id="qv-desc">Product description goes here...</p>
+
+                    <div class="qv-options">
+                        <label>Select Size / Variant:</label>
+                        <div class="size-selector" id="qv-size-selector">
+                            <button class="size-btn active">Small</button>
+                            <button class="size-btn">Medium</button>
+                            <button class="size-btn">Large</button>
+                        </div>
+                    </div>
+
+                    <div class="qv-qty-row">
+                        <div class="qty-picker">
+                            <button id="qv-qty-minus">-</button>
+                            <span id="qv-qty-val">1</span>
+                            <button id="qv-qty-plus">+</button>
+                        </div>
+                        <button id="qv-add-cart" class="btn btn-primary btn-flex">
+                            Add to Shopping Cart
+                        </button>
+                        <button id="qv-wishlist" class="btn btn-outline icon-only-btn" title="Add to Wishlist">
+                            ♥
+                        </button>
+                    </div>
+
+                    <div class="qv-specs-box">
+                        <h4>Specifications & Craftsmanship</h4>
+                        <ul id="qv-specs-list">
+                            <li>100% Certified Organic & Sustainably Sourced</li>
+                            <li>Complimentary Avelour Velvet Box Packaging</li>
+                            <li>2-Year Global Manufacturer Warranty</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Standalone Full Product Page Modal -->
+    <div id="product-page-modal" class="modal full-screen-modal" role="dialog" aria-modal="true">
+        <div class="modal-backdrop" id="product-page-backdrop"></div>
+        <div class="modal-content product-page-content glass-card">
+            <button class="modal-close" id="close-product-page">&times;</button>
+            
+            <!-- Breadcrumbs -->
+            <div class="product-breadcrumbs">
+                <a href="#hero">Home</a> &rsaquo; 
+                <a href="#categories" id="p-crumb-cat">Category</a> &rsaquo; 
+                <span id="p-crumb-name">Product Name</span>
+            </div>
+
+            <div class="product-page-grid">
+                <!-- Gallery & Visuals Column -->
+                <div class="product-gallery-col">
+                    <div class="gallery-thumbs" id="p-thumbs">
+                        <img src="assets/fashion.jpg" class="thumb-img active" data-src="assets/fashion.jpg" alt="Thumb 1">
+                        <img src="assets/electronics.jpg" class="thumb-img" data-src="assets/electronics.jpg" alt="Thumb 2">
+                        <img src="assets/accessories.jpg" class="thumb-img" data-src="assets/accessories.jpg" alt="Thumb 3">
+                        <div class="thumb-badge-tab" id="p-tab-360">360°</div>
+                    </div>
+
+                    <div class="gallery-main-view">
+                        <!-- Image View with Zoom on Hover -->
+                        <div class="zoom-image-container" id="p-zoom-container">
+                            <img src="assets/fashion.jpg" id="p-main-img" alt="Main Product View">
+                            <div class="zoom-lens" id="p-zoom-lens"></div>
+                        </div>
+
+                        <!-- 360 Turntable Canvas View -->
+                        <div class="p-360-view" id="p-360-container" style="display: none;">
+                            <canvas id="p-canvas-360" width="500" height="500"></canvas>
+                            <span class="hint-drag">Drag horizontally to rotate 360°</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Buying Details Column -->
+                <div class="product-info-col">
+                    <span class="pill-tag" id="pp-tag">Atelier Edition</span>
+                    <h1 id="pp-title">Velvet Aura Haute Dress</h1>
+                    
+                    <div class="pp-rating-row">
+                        <span class="stars">★★★★★</span>
+                        <span id="pp-rating-text">4.9 / 5 (128 Verified Reviews)</span>
+                        <span class="badge-stock">In Stock & Ready to Ship</span>
+                    </div>
+
+                    <div class="pp-price-box">
+                        <span class="pp-price" id="pp-price">$295.00</span>
+                        <span class="pp-tax-note">Includes all luxury duties & taxes</span>
+                    </div>
+
+                    <p class="pp-description" id="pp-desc">
+                        Hand-tailored silk velvet gown featuring iridescent violet threading and ergonomic contour seam line craftmanship. Designed for red-carpet elegance.
+                    </p>
+
+                    <!-- Color Swatches -->
+                    <div class="pp-option-group">
+                        <label>Color Variant:</label>
+                        <div class="color-swatches">
+                            <span class="swatch active" style="background: #7F56D9;" title="Royal Violet"></span>
+                            <span class="swatch" style="background: #0F172A;" title="Obsidian Black"></span>
+                            <span class="swatch" style="background: #F59E0B;" title="Amber Gold"></span>
+                        </div>
+                    </div>
+
+                    <!-- Size Selector -->
+                    <div class="pp-option-group">
+                        <label>Select Size:</label>
+                        <div class="size-selector" id="pp-size-selector">
+                            <button class="size-btn">S</button>
+                            <button class="size-btn active">M</button>
+                            <button class="size-btn">L</button>
+                            <button class="size-btn">XL</button>
+                        </div>
+                    </div>
+
+                    <!-- Quantity & Action Buttons -->
+                    <div class="pp-actions-row">
+                        <div class="qty-picker">
+                            <button id="pp-qty-minus">-</button>
+                            <span id="pp-qty-val">1</span>
+                            <button id="pp-qty-plus">+</button>
+                        </div>
+                        <button id="pp-add-cart-btn" class="btn btn-primary btn-glow btn-flex">
+                            🛒 Add to Cart
+                        </button>
+                        <button id="pp-buy-now-btn" class="btn btn-glass btn-flex">
+                            ⚡ Buy Now
+                        </button>
+                        <button id="pp-wishlist-btn" class="btn btn-outline icon-only-btn" title="Wishlist">
+                            ♥
+                        </button>
+                    </div>
+
+                    <!-- Specifications Accordion -->
+                    <div class="pp-specs-accordion">
+                        <details open>
+                            <summary>Craftsmanship & Materials</summary>
+                            <p>Handcrafted using 100% organic mulberry silk, non-toxic plant dyes, and hand-stitched hem finish.</p>
+                        </details>
+                        <details>
+                            <summary>Complimentary Shipping & Returns</summary>
+                            <p>Free global carbon-neutral express shipping within 24 hours. 30-day hassle-free returns.</p>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Reviews Section -->
+            <div class="product-reviews-section">
+                <h3>Client Reviews & Feedback</h3>
+                <div class="reviews-grid">
+                    <div class="review-score-box glass-card">
+                        <span class="score-num">4.9</span>
+                        <div class="stars">★★★★★</div>
+                        <span>Based on 128 verified luxury buyer reviews</span>
+                    </div>
+
+                    <div class="review-cards-list">
+                        <div class="review-card glass-card">
+                            <div class="review-header">
+                                <strong>Camille Laurent</strong>
+                                <span class="stars">★★★★★</span>
+                            </div>
+                            <p>"The fabric feel and silhouette are beyond expectations. Arrived in 2 days in Paris with signature velvet packaging!"</p>
+                        </div>
+                        <div class="review-card glass-card">
+                            <div class="review-header">
+                                <strong>Alexander Sterling</strong>
+                                <span class="stars">★★★★★</span>
+                            </div>
+                            <p>"Unbelievable craftsmanship. The 360 viewer showed exact details before buying. Will purchase again!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Products Section -->
+            <div class="product-related-section">
+                <h3>You May Also Admire</h3>
+                <div class="product-grid" id="pp-related-grid">
+                    <!-- Related product cards -->
+                </div>
+            </div>
+
+            <!-- Sticky Bottom Purchase Panel -->
+            <div class="sticky-buy-bar glass-card" id="sticky-buy-bar">
+                <div class="sticky-product-info">
+                    <img src="assets/fashion.jpg" id="sticky-img" alt="Product">
+                    <div>
+                        <h4 id="sticky-title">Velvet Aura Haute Dress</h4>
+                        <span id="sticky-price" style="color: var(--accent); font-weight: 700;">$295.00</span>
+                    </div>
+                </div>
+                <div class="sticky-actions">
+                    <button class="btn btn-primary" id="sticky-buy-btn">⚡ Instant Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Drawer -->
+    <div id="cart-drawer" class="drawer" role="dialog" aria-modal="true">
+        <div class="drawer-backdrop" id="cart-backdrop"></div>
+        <div class="drawer-content glass-card">
+            <div class="drawer-header">
+                <h3>Shopping Cart (<span id="cart-drawer-count">0</span>)</h3>
+                <button class="modal-close" id="close-cart-btn">&times;</button>
+            </div>
+
+            <div class="drawer-body" id="cart-items-container">
+                <!-- Dynamic cart item list -->
+            </div>
+
+            <div class="drawer-footer">
+                <div class="promo-box">
+                    <input type="text" id="coupon-input" placeholder="Promo code (e.g. AVELOUR20)">
+                    <button id="apply-coupon-btn" class="btn btn-sm btn-outline">Apply</button>
+                </div>
+                <div class="cart-summary-line">
+                    <span>Subtotal:</span>
+                    <strong id="cart-subtotal">$0.00</strong>
+                </div>
+                <div class="cart-summary-line text-sm opacity-8">
+                    <span>Estimated Shipping:</span>
+                    <span id="cart-shipping">Complimentary</span>
+                </div>
+                <div class="cart-summary-line total-line">
+                    <span>Total Amount:</span>
+                    <strong id="cart-total">$0.00</strong>
+                </div>
+                <button id="checkout-btn" class="btn btn-primary btn-block magnetic-btn">
+                    Proceed to Multi-Step Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Drawer / Modal -->
+    <div id="wishlist-drawer" class="drawer" role="dialog" aria-modal="true">
+        <div class="drawer-backdrop" id="wishlist-backdrop"></div>
+        <div class="drawer-content glass-card">
+            <div class="drawer-header">
+                <h3>Your Wishlist (<span id="wishlist-drawer-count">0</span>)</h3>
+                <button class="modal-close" id="close-wishlist-btn">&times;</button>
+            </div>
+            <div class="drawer-body" id="wishlist-items-container">
+                <!-- Dynamic Wishlist Items -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Multi-Step Checkout Modal -->
+    <div id="checkout-modal" class="modal" role="dialog" aria-modal="true">
+        <div class="modal-backdrop" id="checkout-backdrop"></div>
+        <div class="modal-content checkout-content glass-card">
+            <button class="modal-close" id="close-checkout">&times;</button>
+            
+            <div class="checkout-progress">
+                <div class="step-dot active" id="dot-step-1">1. Shipping</div>
+                <div class="step-line"></div>
+                <div class="step-dot" id="dot-step-2">2. Payment</div>
+                <div class="step-line"></div>
+                <div class="step-dot" id="dot-step-3">3. Confirmation</div>
+            </div>
+
+            <form id="checkout-form">
+                <!-- Step 1: Shipping Address -->
+                <div class="checkout-step active" id="checkout-step-1">
+                    <h3>Shipping Address</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="chk-name" placeholder="Lady Eleanor Vance" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="chk-email" placeholder="eleanor@bloomora.com" required>
+                        </div>
+                        <div class="form-group span-2">
+                            <label>Street Address</label>
+                            <input type="text" id="chk-address" placeholder="740 Park Avenue, Apt 14B" required>
+                        </div>
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" id="chk-city" placeholder="New York" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Postal Code</label>
+                            <input type="text" id="chk-zip" placeholder="10021" required>
+                        </div>
+                    </div>
+                    <div class="step-actions">
+                        <button type="button" class="btn btn-primary" id="btn-to-step-2">Continue to Payment &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Payment Method -->
+                <div class="checkout-step" id="checkout-step-2">
+                    <h3>Payment Method</h3>
+                    <div class="payment-tabs">
+                        <label class="pay-option active">
+                            <input type="radio" name="pay-method" value="card" checked> Credit Card (Stripe)
+                        </label>
+                        <label class="pay-option">
+                            <input type="radio" name="pay-method" value="apple"> Apple Pay
+                        </label>
+                        <label class="pay-option">
+                            <input type="radio" name="pay-method" value="paypal"> PayPal Express
+                        </label>
+                    </div>
+
+                    <div class="card-inputs">
+                        <div class="form-group">
+                            <label>Card Number</label>
+                            <input type="text" placeholder="4532 •••• •••• 8892" value="4532 9012 3456 8892" required>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Expiry Date</label>
+                                <input type="text" placeholder="MM/YY" value="08/28" required>
+                            </div>
+                            <div class="form-group">
+                                <label>CVC Security</label>
+                                <input type="password" placeholder="•••" value="888" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-actions">
+                        <button type="button" class="btn btn-outline" id="btn-back-to-step-1">&larr; Back</button>
+                        <button type="button" class="btn btn-primary" id="btn-to-step-3">Review Order & Pay &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Order Review & Confetti -->
+                <div class="checkout-step" id="checkout-step-3">
+                    <h3>Order Summary & Confirmation</h3>
+                    <div class="order-summary-box" id="chk-summary-box">
+                        <!-- Order items breakdown -->
+                    </div>
+
+                    <div class="step-actions">
+                        <button type="button" class="btn btn-outline" id="btn-back-to-step-2">&larr; Back</button>
+                        <button type="submit" class="btn btn-primary btn-glow" id="btn-place-order">
+                            Confirm Order ($<span id="chk-final-total">0.00</span>)
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="checkout-success" id="checkout-success" style="display: none;">
+                <canvas id="confetti-canvas"></canvas>
+                <div class="success-icon">✓</div>
+                <h2>Order Confirmed!</h2>
+                <p>Thank you for choosing Avelour (bloomora.global). Your order <strong id="success-order-id">#AVELOUR-98214</strong> has been placed.</p>
+                <p class="opacity-8">A receipt and real-time tracking link have been dispatched to your email.</p>
+                <div style="display: flex; gap: 12px; justify-content: center; margin-top: 16px;">
+                    <button class="btn btn-outline" id="trace-order-map-btn">📍 Trace Live Order on Google Maps</button>
+                    <button class="btn btn-primary" id="close-success-btn">Continue Shopping</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Dashboard Portal Modal -->
+    <div id="dashboard-modal" class="modal" role="dialog" aria-modal="true">
+        <div class="modal-backdrop" id="dashboard-backdrop"></div>
+        <div class="modal-content dashboard-content glass-card">
+            <button class="modal-close" id="close-dashboard">&times;</button>
+            <div class="dashboard-grid">
+                <div class="dash-sidebar">
+                    <div class="user-avatar-box">
+                        <div class="avatar-large">EV</div>
+                        <h4>Lady Eleanor Vance</h4>
+                        <span>VIP Gold Member</span>
+                    </div>
+                    <ul class="dash-menu">
+                        <li class="active" data-tab="orders">Orders History</li>
+                        <li data-tab="profile">Profile Settings</li>
+                        <li data-tab="addresses">Saved Addresses</li>
+                        <li data-tab="wishlist">Wishlist Items</li>
+                    </ul>
+                </div>
+
+                <div class="dash-main">
+                    <!-- Orders History -->
+                    <div class="dash-tab-content active" id="dash-tab-orders">
+                        <h3>Order History & Live GPS Tracking</h3>
+                        <div class="order-card glass-card">
+                            <div class="order-header-row">
+                                <div>
+                                    <strong>#AVELOUR-88192</strong>
+                                    <span class="opacity-7"> — July 26, 2026</span>
+                                </div>
+                                <span class="badge-status status-delivered">In Transit</span>
+                            </div>
+                            <div class="order-items-preview">
+                                <span>Rose Royale Eau de Parfum (x1)</span>
+                                <strong>$185.00</strong>
+                            </div>
+                            <div class="tracking-progress-bar">
+                                <div class="t-step done">Ordered</div>
+                                <div class="t-step done">Processing</div>
+                                <div class="t-step active">Shipped</div>
+                                <div class="t-step">Delivered</div>
+                            </div>
+
+                            <!-- Interactive Internal Canvas Delivery Route Tracker (No Google API) -->
+                            <div class="google-map-tracker-box glass-card" style="margin-top: 24px; padding: 20px; border: 1px solid rgba(168, 85, 247, 0.3);">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                                    <h4 style="display: flex; align-items: center; gap: 8px; font-size: 1rem; margin: 0;">
+                                        <span style="color: var(--secondary); font-size: 1.2rem;">📍</span> Live GPS Delivery Route Tracker
+                                    </h4>
+                                    <span class="badge-status status-delivered" id="map-live-tag">● LIVE GPS DISPATCH ACTIVE</span>
+                                </div>
+                                
+                                <!-- Internal Animated Canvas Vector Map Container -->
+                                <div class="google-map-container" style="position: relative; width: 100%; height: 260px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: radial-gradient(circle at center, #1C2541 0%, #0A0F1D 100%);">
+                                    <canvas id="route-map-canvas" width="600" height="260" style="width: 100%; height: 100%; display: block;"></canvas>
+                                    
+                                    <!-- Live HUD Overlay -->
+                                    <div class="map-overlay-hud" style="position: absolute; bottom: 12px; left: 12px; right: 12px; background: rgba(10, 15, 29, 0.92); backdrop-filter: blur(12px); padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                                        <div>
+                                            <span class="opacity-7" style="font-size: 0.75rem; display: block;">LIVE DISPATCH ROUTE</span>
+                                            <strong style="font-size: 0.85rem; color: var(--secondary);">Grasse Atelier, FR &rarr; New Delhi Cargo Hub, IN</strong>
+                                        </div>
+                                        <div style="text-align: right;">
+                                            <span class="opacity-7" style="font-size: 0.75rem; display: block;">ESTIMATED ARRIVAL</span>
+                                            <strong style="font-size: 0.85rem; color: var(--accent);">Today by 5:30 PM (Air Cargo)</strong>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Live Courier GPS Telemetry Row -->
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; font-size: 0.85rem;">
+                                    <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                        <span class="opacity-7" style="display:block; font-size: 0.75rem;">Carrier & Flight</span>
+                                        <strong>FedEx Air Express FX-892</strong>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                        <span class="opacity-7" style="display:block; font-size: 0.75rem;">Current GPS Coordinates</span>
+                                        <strong style="color: var(--secondary);" id="gmap-coords">48.8566° N, 2.3522° E (En Route)</strong>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                        <span class="opacity-7" style="display:block; font-size: 0.75rem;">Climate Vault</span>
+                                        <strong style="color: #10B981;">Secured at 18.2°C</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Settings -->
+                    <div class="dash-tab-content" id="dash-tab-profile">
+                        <h3>Profile Settings</h3>
+                        <form class="form-grid">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" value="Lady Eleanor Vance">
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" value="eleanor@bloomora.global">
+                            </div>
+                            <button type="button" class="btn btn-primary">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Authentication Modal (Login / Signup) -->
+    <div id="auth-modal" class="modal" role="dialog" aria-modal="true">
+        <div class="modal-backdrop" id="auth-backdrop"></div>
+        <div class="modal-content auth-content glass-card">
+            <button class="modal-close" id="close-auth">&times;</button>
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" id="tab-login-btn">Log In</button>
+                <button class="auth-tab-btn" id="tab-signup-btn">Create Account</button>
+            </div>
+
+            <!-- Sign In Mode Switcher: Email vs Phone Number -->
+            <div class="auth-method-switcher">
+                <button class="method-btn active" id="method-email-btn">✉ Email Sign In</button>
+                <button class="method-btn" id="method-phone-btn">📱 Phone Sign In</button>
+            </div>
+
+            <form id="auth-form">
+                <div class="social-login-row">
+                    <button type="button" class="btn btn-outline btn-block">Sign in with Google</button>
+                    <button type="button" class="btn btn-outline btn-block">Sign in with Apple</button>
+                </div>
+                <div class="divider-or"><span id="divider-text">OR EMAIL SIGN IN</span></div>
+
+                <!-- Email Fields -->
+                <div id="auth-email-section">
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="auth-email" placeholder="name@domain.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="auth-pass" placeholder="••••••••">
+                    </div>
+                </div>
+
+                <!-- Phone Number Fields -->
+                <div id="auth-phone-section" style="display: none;">
+                    <div class="form-group">
+                        <label>Mobile Phone Number</label>
+                        <div class="phone-input-row">
+                            <select id="country-code-select" class="country-select">
+                                <option value="+91" selected>🇮🇳 +91 (India)</option>
+                                <option value="+1">🇺🇸 +1 (US)</option>
+                                <option value="+44">🇬🇧 +44 (UK)</option>
+                                <option value="+33">🇫🇷 +33 (FR)</option>
+                                <option value="+81">🇯🇵 +81 (JP)</option>
+                                <option value="+49">🇩🇪 +49 (DE)</option>
+                            </select>
+                            <input type="tel" id="auth-phone" placeholder="555-019-2834">
+                        </div>
+                    </div>
+
+                    <button type="button" id="send-otp-btn" class="btn btn-sm btn-outline btn-block" style="margin-bottom: 16px;">
+                        📲 Send SMS Verification OTP
+                    </button>
+
+                    <!-- OTP Code Inputs -->
+                    <div id="otp-container" style="display: none; margin-bottom: 16px;">
+                        <label class="opacity-8" style="font-size: 0.85rem; display: block; margin-bottom: 6px;">Enter 6-Digit SMS Verification Code</label>
+                        <div class="otp-inputs-row">
+                            <input type="text" maxlength="1" class="otp-digit" data-idx="0">
+                            <input type="text" maxlength="1" class="otp-digit" data-idx="1">
+                            <input type="text" maxlength="1" class="otp-digit" data-idx="2">
+                            <input type="text" maxlength="1" class="otp-digit" data-idx="3">
+                            <input type="text" maxlength="1" class="otp-digit" data-idx="4">
+                            <input type="text" maxlength="1" class="otp-digit" data-idx="5">
+                        </div>
+                        <span id="otp-timer-msg" style="font-size: 0.8rem; color: var(--accent); display: block; margin-top: 6px; text-align: center;">Code sent! Resend available in 30s</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block magnetic-btn" id="auth-submit-btn">
+                    Log In to Avelour
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp VIP Service Department Quick Chat Button (+91 91493 72043) -->
+    <a href="https://wa.me/919149372043?text=Hello%20Avelour%20VIP%20Service%20Department!%20I%20need%20assistance%20with%20my%20perfume%20order." 
+       target="_blank" 
+       rel="noopener"
+       class="whatsapp-float-btn" 
+       title="Chat with Avelour VIP Service Department on WhatsApp (+91 91493 72043)"
+       aria-label="WhatsApp VIP Service Department (+91 91493 72043)">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="white">
+            <path d="M16 2a13 13 0 0 0-11 20L3 29l7.3-1.9A13 13 0 1 0 16 2zm0 23.8a10.8 10.8 0 0 1-5.5-1.5l-.4-.2-4.1 1.1 1.1-4-.3-.4A10.8 10.8 0 1 1 16 25.8zm6-8.1c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.7.2s-.8 1-1 1.2c-.2.2-.4.2-.7 0a9 9 0 0 1-2.6-1.6 10 10 0 0 1-1.8-2.2c-.2-.3 0-.5.1-.7l.5-.6c.1-.2.2-.4.3-.5.1-.2.1-.3 0-.5s-.7-1.7-1-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4s-1.2 1.2-1.2 2.8 1.2 3.2 1.4 3.4c.2.3 2.4 3.7 5.9 5.2 3.5 1.5 3.5 1 4.1 1 .6 0 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6z"/>
+        </svg>
+        <span class="whatsapp-badge-pulse"></span>
+        <span class="whatsapp-tooltip">Chat with VIP Service Department</span>
+    </a>
+
+    <!-- AI Concierge Chatbot Widget -->
+    <div id="chat-widget" class="chat-widget">
+        <button id="chat-toggle-btn" class="chat-toggle-btn" aria-label="Open AI Concierge">
+            <span>✨</span>
+        </button>
+        
+        <div class="chat-window glass-card" id="chat-window">
+            <div class="chat-header">
+                <div class="chat-title">
+                    <span class="dot-online"></span> AI Stylist Concierge
+                </div>
+                <button class="chat-close" id="chat-close-btn">&times;</button>
+            </div>
+
+            <div class="chat-messages" id="chat-messages">
+                <div class="chat-msg bot">
+                    Hello! I am your Avelour (bloomora.global) AI Concierge. How may I assist your shopping journey today?
+                </div>
+            </div>
+
+            <div class="chat-quick-prompts">
+                <a href="https://wa.me/919149372043?text=Hello%20Avelour%20VIP%20Service%20Department!%20I%20need%20assistance%20with%20my%20perfume%20order." target="_blank" rel="noopener" class="prompt-chip" style="background: rgba(37, 211, 102, 0.2); border-color: #25D366; color: #25D366; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                    <svg viewBox="0 0 32 32" width="14" height="14" fill="#25D366"><path d="M16 2a13 13 0 0 0-11 20L3 29l7.3-1.9A13 13 0 1 0 16 2zm0 23.8a10.8 10.8 0 0 1-5.5-1.5l-.4-.2-4.1 1.1 1.1-4-.3-.4A10.8 10.8 0 1 1 16 25.8zm6-8.1c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.7.2s-.8 1-1 1.2c-.2.2-.4.2-.7 0a9 9 0 0 1-2.6-1.6 10 10 0 0 1-1.8-2.2c-.2-.3 0-.5.1-.7l.5-.6c.1-.2.2-.4.3-.5.1-.2.1-.3 0-.5s-.7-1.7-1-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4s-1.2 1.2-1.2 2.8 1.2 3.2 1.4 3.4c.2.3 2.4 3.7 5.9 5.2 3.5 1.5 3.5 1 4.1 1 .6 0 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6z"/></svg>
+                    <span>WhatsApp</span>
+                </a>
+                <button class="prompt-chip" data-prompt="Recommend a luxury fragrance">Fragrance Advice</button>
+            </div>
+
+            <div class="chat-input-row">
+                <input type="text" id="chat-input" placeholder="Type your request...">
+                <button id="chat-send-btn" class="btn btn-primary btn-sm">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Import -->
+    <script src="app.js"></script>
+</body>
+</html>
