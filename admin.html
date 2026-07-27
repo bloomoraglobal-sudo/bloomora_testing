@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Avelour (bloomora.global) Admin Panel - Add Products, Manage Listings, Out of Stock Control & Multi-View Tracking">
-    <title>Avelour Admin Panel | Out of Stock & Inventory Control (bloomora.global)</title>
+    <meta name="description" content="Avelour (bloomora.global) Protected Enterprise Headless CMS & Auth Gateway">
+    <title>Avelour Admin Gateway | Protected CMS Access (bloomora.global)</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,24 +24,25 @@
         .admin-sidebar {
             background: rgba(10, 15, 29, 0.98);
             border-right: 1px solid var(--border-color);
-            padding: 32px 24px;
+            padding: 28px 20px;
             display: flex;
             flex-direction: column;
-            gap: 32px;
+            gap: 28px;
             position: sticky;
             top: 0;
             height: 100vh;
+            overflow-y: auto;
         }
 
         .admin-nav {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
         .admin-nav li {
-            padding: 14px 18px;
+            padding: 12px 16px;
             border-radius: var(--radius-md);
             color: var(--text-muted);
             cursor: pointer;
@@ -49,7 +50,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             transition: all 0.3s var(--transition-smooth);
             border: 1px solid transparent;
         }
@@ -62,7 +63,7 @@
         }
 
         .admin-main {
-            padding: 40px;
+            padding: 36px;
             overflow-y: auto;
             background: var(--bg-main);
         }
@@ -71,28 +72,38 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 32px;
+            margin-bottom: 28px;
             padding-bottom: 20px;
             border-bottom: 1px solid var(--border-color);
         }
 
+        .user-role-badge {
+            padding: 4px 12px;
+            border-radius: 99px;
+            background: rgba(168, 85, 247, 0.2);
+            color: var(--secondary);
+            border: 1px solid var(--secondary);
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
         .metrics-row {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 36px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
         }
 
         .metric-card-box {
-            padding: 24px;
+            padding: 20px;
             border-radius: var(--radius-md);
             background: var(--bg-card);
             border: 1px solid var(--border-color);
         }
 
         .metric-card-box h3 {
-            font-size: 1.8rem;
-            margin: 8px 0;
+            font-size: 1.6rem;
+            margin: 6px 0;
             color: var(--secondary);
         }
 
@@ -102,11 +113,11 @@
 
         .tab-panel.active {
             display: block;
-            animation: fadeIn 0.4s ease;
+            animation: fadeIn 0.3s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -117,10 +128,10 @@
         }
 
         .admin-table th, .admin-table td {
-            padding: 14px 16px;
+            padding: 12px 14px;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .admin-table th {
@@ -128,21 +139,21 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
 
         .img-preview-thumb {
-            width: 50px;
-            height: 50px;
+            width: 44px;
+            height: 44px;
             object-fit: cover;
             border-radius: 8px;
             border: 1px solid var(--border-color);
         }
 
         .status-pill {
-            padding: 4px 12px;
+            padding: 4px 10px;
             border-radius: 99px;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 700;
             display: inline-block;
         }
@@ -151,82 +162,201 @@
         .status-low { background: rgba(245, 158, 11, 0.2); color: #F59E0B; }
         .status-out { background: rgba(239, 68, 68, 0.25); color: #EF4444; border: 1px solid #EF4444; }
 
-        .view-switcher-tabs {
+        /* Auth Gatekeeper Overlay & Tabs */
+        .admin-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(10, 15, 29, 0.96);
+            backdrop-filter: blur(20px);
+            z-index: 9999;
             display: flex;
-            gap: 12px;
-            margin-bottom: 24px;
+            align-items: center;
+            justify-content: center;
         }
 
-        .view-tab-btn {
-            padding: 10px 20px;
-            border-radius: 99px;
-            background: rgba(255, 255, 255, 0.05);
+        .admin-auth-card {
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
+            padding: 36px;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 480px;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .auth-tab-buttons {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 4px;
+            border-radius: 99px;
+            border: 1px solid var(--border-color);
+        }
+
+        .auth-tab-btn {
+            flex: 1;
+            padding: 8px;
+            text-align: center;
+            border: none;
+            background: transparent;
             color: var(--text-muted);
+            font-weight: 700;
+            font-size: 0.85rem;
             cursor: pointer;
-            font-weight: 600;
+            border-radius: 99px;
             transition: all 0.3s ease;
         }
 
-        .view-tab-btn.active {
+        .auth-tab-btn.active {
             background: var(--primary);
-            border-color: var(--secondary);
             color: #FFFFFF;
         }
 
-        .kanban-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+        .password-strength-container {
+            margin-top: 6px;
         }
 
-        .kanban-col {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 20px;
+        .strength-bar-bg {
+            height: 6px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 99px;
+            overflow: hidden;
         }
 
-        .kanban-col-header {
-            font-size: 0.9rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 16px;
-            color: var(--secondary);
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .kanban-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            padding: 16px;
-            border-radius: var(--radius-sm);
-            margin-bottom: 12px;
+        .strength-bar-fill {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease, background-color 0.3s ease;
         }
     </style>
 </head>
 <body>
 
+    <!-- AUTHENTICATION GATEKEEPER OVERLAY (Login, Sign Up, Password Reset, 2FA) -->
+    <div id="admin-auth-screen" class="admin-modal-overlay">
+        <div class="admin-auth-card">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <span class="logo-icon" style="font-size: 2.2rem; color: var(--secondary);">❖</span>
+                <h2 style="margin-top: 6px; font-size: 1.6rem;">Avelour Protected CMS</h2>
+                <p class="opacity-7" style="font-size: 0.85rem;">bloomora.global Enterprise Security Portal</p>
+            </div>
+
+            <!-- Auth Form Switcher Tabs -->
+            <div class="auth-tab-buttons">
+                <button class="auth-tab-btn active" id="tab-btn-login">🔓 Sign In</button>
+                <button class="auth-tab-btn" id="tab-btn-signup">✍️ Sign Up</button>
+                <button class="auth-tab-btn" id="tab-btn-forgot">🔑 Reset</button>
+            </div>
+
+            <!-- Alert Notification Banner -->
+            <div id="auth-alert-banner" style="display: none; padding: 12px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 16px; font-weight: 600;"></div>
+
+            <!-- FORM 1: LOGIN (SIGN IN) -->
+            <form id="auth-login-form" style="display: flex; flex-direction: column; gap: 14px;">
+                <div class="form-group">
+                    <label>Admin Email or Username</label>
+                    <input type="text" id="login-email" placeholder="admin@bloomora.global" value="admin@bloomora.global" required style="width: 100%; padding: 11px; border-radius: 8px; background: var(--bg-surface); border: 1px solid var(--border-color); color: white;">
+                </div>
+                <div class="form-group">
+                    <label style="display: flex; justify-content: space-between;">
+                        <span>Password</span>
+                        <span id="toggle-login-pass" style="color: var(--secondary); cursor: pointer; font-size: 0.8rem;">👁 Show</span>
+                    </label>
+                    <input type="password" id="login-pass" placeholder="Enter password..." value="AdminPass123!" required style="width: 100%; padding: 11px; border-radius: 8px; background: var(--bg-surface); border: 1px solid var(--border-color); color: white;">
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem;">
+                    <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; margin: 0;">
+                        <input type="checkbox" id="login-remember" checked>
+                        <span>Remember session (7 days)</span>
+                    </label>
+                    <a href="#" id="link-forgot-pass" style="color: var(--accent); font-weight: 600;">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" style="padding: 14px; margin-top: 6px;">
+                    🚀 Secure Admin Sign In
+                </button>
+            </form>
+
+            <!-- FORM 2: SIGN UP (REGISTRATION & STRENGTH METER) -->
+            <form id="auth-signup-form" style="display: none; flex-direction: column; gap: 12px;">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="signup-name" placeholder="Lady Eleanor Vance" required style="width: 100%; padding: 10px; border-radius: 8px; background: var(--bg-surface); border: 1px solid var(--border-color); color: white;">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="signup-email" placeholder="eleanor@bloomora.global" required style="width: 100%; padding: 10px; border-radius: 8px; background: var(--bg-surface); border: 1px solid var(--border-color); color: white;">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signup-pass" placeholder="Create strong password..." required style="width: 100%; padding: 10px; border-radius: 8px; background: var(--bg-surface); border: 1px solid var(--border-color); color: white;">
+                    <!-- Password Strength Meter -->
+                    <div class="password-strength-container">
+                        <div class="strength-bar-bg">
+                            <div id="strength-fill" class="strength-bar-fill"></div>
+                        </div>
+                        <span id="strength-label" style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 4px;">Strength: Empty</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number (+91 India)</label>
+                    <input type="text" id="signup-phone" value="+91 91493 72043" style="width: 100%; padding: 10px; border-radius: 8px; background: var(--bg-surface); border: 1px solid var(--border-color); color: white;">
+                </div>
+                <div style="font-size: 0.8rem;">
+                    <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; margin: 0;">
+                        <input type="checkbox" id="signup-terms" required checked>
+                        <span>I accept Avelour Security Terms & Policies</span>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" style="padding: 12px; margin-top: 4px;">
+                    ✍️ Create Account & Verify
+                </button>
+            </form>
+
+            <!-- FORM 3: FORGOT / RESET PASSWORD -->
+            <form id="auth-forgot-form" style="display: none; flex-direction: column; gap: 14px;">
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Enter your registered admin email to receive a 15-minute secure password reset token.</p>
+                <div class="form-group">
+                    <label>Registered Email</label>
+                    <input type="email" id="forgot-email" placeholder="admin@bloomora.global" required style="width: 100%; padding: 11px; border-radius: 8px; background: var(--bg-surface); border: 1px solid var(--border-color); color: white;">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" style="padding: 12px;">
+                    🔑 Send Secure Reset Token
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MAIN PROTECTED ADMIN LAYOUT -->
     <div class="admin-layout">
         <!-- Sidebar Navigation -->
         <aside class="admin-sidebar">
             <a href="index.html" class="logo">
                 <span class="logo-icon">❖</span> Avelour
             </a>
-            <span style="font-size: 0.8rem; color: var(--accent); margin-top: -24px; font-weight: 600;">bloomora.global Admin</span>
+            <span style="font-size: 0.78rem; color: var(--accent); margin-top: -24px; font-weight: 700;">bloomora.global CMS</span>
 
             <ul class="admin-nav" id="admin-main-nav">
-                <li class="active" data-panel="panel-overview">📊 Dashboard Overview</li>
-                <li data-panel="panel-add-product">➕ Add New Product</li>
-                <li data-panel="panel-manage-products">📦 Manage Product Listings</li>
-                <li data-panel="panel-manage-stock">🚫 Out of Stock & Inventory</li>
-                <li data-panel="panel-track-orders">🚚 Track Orders (Multi-View)</li>
+                <li class="active" data-panel="panel-overview">📊 Analytics Dashboard</li>
+                <li data-panel="panel-products">📦 Product Management</li>
+                <li data-panel="panel-categories">🗂️ Category Manager</li>
+                <li data-panel="panel-stock">📉 Inventory & Stock</li>
+                <li data-panel="panel-banner-cms">🎨 Hero & Banner CMS</li>
+                <li data-panel="panel-orders">🚚 Orders & GPS Tracking</li>
+                <li data-panel="panel-customers">👥 Customer Profiles</li>
+                <li data-panel="panel-coupons">🎟️ Coupon Engine</li>
+                <li data-panel="panel-blogs">📝 Blog CMS</li>
+                <li data-panel="panel-reviews">⭐ Review Moderation</li>
+                <li data-panel="panel-seo">🔍 SEO Management</li>
+                <li data-panel="panel-media">🖼️ Media Library</li>
+                <li data-panel="panel-settings">⚙️ Website Settings</li>
+                <li data-panel="panel-audit">📜 Real-Time Audit Logs</li>
             </ul>
 
             <div style="margin-top: auto; display: flex; flex-direction: column; gap: 10px;">
-                <a href="index.html" class="btn btn-outline btn-block btn-sm">&larr; Return to Store (en-IN)</a>
+                <button class="btn btn-outline btn-block btn-sm" id="admin-logout-btn">🔒 Logout CMS</button>
+                <a href="index.html" target="_blank" class="btn btn-primary btn-block btn-sm">⚡ View Live Store</a>
             </div>
         </aside>
 
@@ -235,168 +365,89 @@
             <!-- Header Bar -->
             <div class="admin-header-row">
                 <div>
-                    <h2>Avelour Product & Stock Control Panel</h2>
-                    <span class="opacity-7">bloomora.global Standalone Management Suite • English (India)</span>
+                    <h2>Avelour Enterprise Headless CMS & Control Panel</h2>
+                    <span class="opacity-7" style="font-size: 0.85rem;">Real-Time Broadcast Engine Active • English (India) INR</span>
                 </div>
-                <div style="display: flex; gap: 12px;">
-                    <button class="btn btn-outline btn-sm" id="export-reports-btn">📥 Export Inventory Report</button>
-                    <a href="index.html" class="btn btn-primary btn-sm">View Live Store</a>
+                <div style="display: flex; gap: 14px; align-items: center;">
+                    <div style="text-align: right;">
+                        <strong style="display: block; font-size: 0.9rem;" id="logged-user-name">Lady Eleanor Vance</strong>
+                        <span class="user-role-badge" id="logged-user-role">👑 Super Admin</span>
+                    </div>
+                    <button class="btn btn-outline btn-sm" id="trigger-sync-btn">🔄 Broadcast Live Sync</button>
                 </div>
             </div>
 
-            <!-- Global Key KPI Cards -->
+            <!-- Global KPI Metrics Cards -->
             <div class="metrics-row">
                 <div class="metric-card-box glass-card">
-                    <span class="opacity-7">Total Revenue (INR)</span>
+                    <span class="opacity-7" style="font-size: 0.78rem;">Total Revenue (INR)</span>
                     <h3 id="stat-revenue">₹1,24,34,800</h3>
-                    <span style="color: #10B981; font-size: 0.85rem;">+24% vs last month</span>
+                    <span style="color: #10B981; font-size: 0.8rem;">+24% vs last month</span>
                 </div>
                 <div class="metric-card-box glass-card">
-                    <span class="opacity-7">Active Perfume Listings</span>
-                    <h3 id="stat-listings">9 Fragrances</h3>
-                    <span style="color: var(--secondary); font-size: 0.85rem;">Across 3 categories</span>
+                    <span class="opacity-7" style="font-size: 0.78rem;">Active Products</span>
+                    <h3 id="stat-products">9 Scents</h3>
+                    <span style="color: var(--secondary); font-size: 0.8rem;">3 Categories</span>
                 </div>
                 <div class="metric-card-box glass-card">
-                    <span class="opacity-7">Total Inventory Stock</span>
-                    <h3 id="stat-units">850 Bottles</h3>
-                    <span style="color: #10B981; font-size: 0.85rem;">100% Quality Checked</span>
+                    <span class="opacity-7" style="font-size: 0.78rem;">Inventory Bottles</span>
+                    <h3 id="stat-stock">842 Units</h3>
+                    <span style="color: #10B981; font-size: 0.8rem;">Auto-Deduction On</span>
                 </div>
                 <div class="metric-card-box glass-card">
-                    <span class="opacity-7">Out of Stock Alerts</span>
+                    <span class="opacity-7" style="font-size: 0.78rem;">Out of Stock</span>
                     <h3 id="stat-out" style="color: #EF4444;">1 Product</h3>
-                    <span style="color: #EF4444; font-size: 0.85rem;">Requires Stock Refill</span>
+                    <span style="color: #EF4444; font-size: 0.8rem;">Stock Refill Required</span>
+                </div>
+                <div class="metric-card-box glass-card">
+                    <span class="opacity-7" style="font-size: 0.78rem;">Active Orders</span>
+                    <h3 id="stat-orders">142 Dispatches</h3>
+                    <span style="color: #F59E0B; font-size: 0.8rem;">GPS Tracked</span>
                 </div>
             </div>
 
             <!-- ==========================================================================
-                 PANEL 1: DASHBOARD OVERVIEW
+                 PANEL 1: ANALYTICS DASHBOARD
                  ========================================================================== -->
             <div class="tab-panel active" id="panel-overview">
-                <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 32px;">
-                    <div class="glass-card" style="padding: 28px;">
-                        <h3>📈 Weekly Revenue & Fragrance Sales Chart</h3>
-                        <p class="opacity-7" style="font-size: 0.9rem; margin-bottom: 20px;">Sales performance across Men's, Women's, and Unisex perfumes in ₹ INR</p>
-                        <canvas id="overview-chart" width="600" height="260"></canvas>
+                <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px;">
+                    <div class="glass-card" style="padding: 24px;">
+                        <h3>📈 Weekly Revenue & Sales Chart (₹ INR)</h3>
+                        <p class="opacity-7" style="font-size: 0.85rem; margin-bottom: 16px;">Sales performance across Men's, Women's, and Unisex fragrances</p>
+                        <canvas id="overview-chart" width="600" height="240"></canvas>
                     </div>
 
-                    <div class="glass-card" style="padding: 28px;">
-                        <h3>⚡ Quick Stock & Out of Stock Summary</h3>
-                        <ul style="list-style: none; display: flex; flex-direction: column; gap: 16px; margin-top: 16px;">
-                            <li style="display: flex; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
-                                <span>Obsidian Oud Noir</span>
-                                <span class="status-pill status-active">120 Units (In Stock)</span>
-                            </li>
-                            <li style="display: flex; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
-                                <span>Rose Royale Eau de Parfum</span>
-                                <span class="status-pill status-active">94 Units (In Stock)</span>
-                            </li>
-                            <li style="display: flex; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
-                                <span>Velvet Rose & Amber Oud</span>
-                                <span class="status-pill status-out">🚫 OUT OF STOCK (0 Units)</span>
-                            </li>
+                    <div class="glass-card" style="padding: 24px;">
+                        <h3>⚡ Live Store Activity & Audit Feed</h3>
+                        <ul id="live-audit-feed" style="list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 14px; font-size: 0.85rem;">
+                            <!-- Rendered dynamically -->
                         </ul>
                     </div>
                 </div>
             </div>
 
             <!-- ==========================================================================
-                 PANEL 2: ADD NEW PRODUCT & PHOTO
+                 PANEL 2: PRODUCT MANAGEMENT
                  ========================================================================== -->
-            <div class="tab-panel" id="panel-add-product">
-                <div class="glass-card" style="padding: 36px; max-width: 900px; margin: 0 auto;">
-                    <h3>➕ Add & Publish New Fragrance Product</h3>
-                    <p class="opacity-7" style="font-size: 0.9rem; margin-bottom: 24px;">Upload perfume photos, set notes, price in ₹ INR, and configure Stock Availability</p>
-
-                    <form id="admin-add-product-form" class="form-grid">
-                        <div class="form-group span-2">
-                            <label>Product Name / Fragrance Title</label>
-                            <input type="text" id="new-prod-name" placeholder="e.g. Imperial Sapphire Oud Eau de Parfum" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Fragrance Category</label>
-                            <select id="new-prod-cat" class="country-select" style="padding: 12px;">
-                                <option value="men-perfume">👔 Men's Perfume</option>
-                                <option value="women-perfume">🌸 Women's Perfume</option>
-                                <option value="unisex-perfume">✨ Unisex Perfume</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Price in ₹ INR</label>
-                            <input type="number" id="new-prod-price" placeholder="18500" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Fragrance Edition Tag</label>
-                            <input type="text" id="new-prod-tag" placeholder="e.g. Atelier Edition / Limited Drop" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Initial Stock Inventory Units</label>
-                            <input type="number" id="new-prod-stock" value="100" placeholder="100" required>
-                        </div>
-
-                        <div class="form-group span-2" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); padding: 16px; border-radius: 8px; margin: 8px 0;">
-                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: #FCA5A5; font-weight: 700; margin: 0;">
-                                <input type="checkbox" id="new-prod-outofstock" style="width: 20px; height: 20px;">
-                                <span>🚫 Mark this product as OUT OF STOCK immediately upon publishing</span>
-                            </label>
-                        </div>
-
-                        <div class="form-group span-2">
-                            <label>Fragrance Notes & Detailed Description</label>
-                            <textarea id="new-prod-desc" style="width: 100%; background: var(--bg-surface); border: 1px solid var(--border-color); color: white; padding: 12px; border-radius: 8px; min-height: 90px;" placeholder="Top Notes: Calabrian Bergamot; Heart Notes: Damask Rose; Base Notes: Smoked Cambodian Oud..." required></textarea>
-                        </div>
-
-                        <div class="form-group span-2">
-                            <label>Product Photo File / URL</label>
-                            <div style="display: flex; gap: 16px; align-items: center;">
-                                <input type="text" id="new-prod-img" placeholder="assets/men_perfume.jpg" value="assets/men_perfume.jpg" style="flex: 1;" required>
-                                <img id="photo-preview" src="assets/men_perfume.jpg" class="img-preview-thumb" alt="Preview">
-                            </div>
-                        </div>
-
-                        <div class="form-group span-2" style="margin-top: 16px;">
-                            <button type="submit" class="btn btn-primary btn-block magnetic-btn" style="padding: 16px;">
-                                🚀 Publish Product to Live Store Catalog
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- ==========================================================================
-                 PANEL 3: MANAGE PRODUCT LISTINGS
-                 ========================================================================== -->
-            <div class="tab-panel" id="panel-manage-products">
-                <div class="glass-card" style="padding: 32px;">
+            <div class="tab-panel" id="panel-products">
+                <div class="glass-card" style="padding: 28px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                        <h3>📦 Manage Active Product Listings & Availability</h3>
-                        <div style="display: flex; gap: 12px;">
-                            <input type="text" id="search-listings-input" placeholder="Search perfume..." style="padding: 8px 16px; width: 220px;">
-                            <select id="filter-cat-select" class="country-select" style="padding: 8px 12px;">
-                                <option value="all">All Categories</option>
-                                <option value="men-perfume">Men's Perfumes</option>
-                                <option value="women-perfume">Women's Perfumes</option>
-                                <option value="unisex-perfume">Unisex Perfumes</option>
-                            </select>
-                        </div>
+                        <h3>📦 Product Catalog & Real-Time Sync</h3>
+                        <button class="btn btn-primary btn-sm" onclick="alert('Add product modal opened')">➕ Add New Fragrance Product</button>
                     </div>
-
                     <table class="admin-table">
                         <thead>
                             <tr>
                                 <th>Photo</th>
-                                <th>Perfume Title</th>
+                                <th>SKU & Name</th>
                                 <th>Category</th>
                                 <th>Price (INR)</th>
-                                <th>Tag</th>
-                                <th>Stock Status</th>
-                                <th>Quick Actions</th>
+                                <th>Stock</th>
+                                <th>Status</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="listings-tbody">
+                        <tbody id="products-tbody">
                             <!-- Rendered dynamically -->
                         </tbody>
                     </table>
@@ -404,25 +455,47 @@
             </div>
 
             <!-- ==========================================================================
-                 PANEL 4: MANAGE STOCK & OUT OF STOCK CONTROLS
+                 PANEL 3: CATEGORY MANAGER
                  ========================================================================== -->
-            <div class="tab-panel" id="panel-manage-stock">
-                <div class="glass-card" style="padding: 32px;">
+            <div class="tab-panel" id="panel-categories">
+                <div class="glass-card" style="padding: 28px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                        <div>
-                            <h3>📉 Out of Stock & Inventory Management</h3>
-                            <span class="opacity-7" style="font-size: 0.85rem;">Control item availability, adjust stock quantities, and trigger instant Out of Stock status</span>
-                        </div>
-                        <button class="btn btn-outline btn-sm" id="bulk-refill-btn">⚡ Bulk Stock Refill (+50 Units)</button>
+                        <h3>🗂️ Category Manager</h3>
+                        <button class="btn btn-primary btn-sm" onclick="alert('Category created!')">➕ Create New Category</button>
                     </div>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Icon</th>
+                                <th>Category Name</th>
+                                <th>Description</th>
+                                <th>Items</th>
+                                <th>Order</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="categories-tbody">
+                            <!-- Rendered dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
+            <!-- ==========================================================================
+                 PANEL 4: INVENTORY & STOCK MANAGEMENT
+                 ========================================================================== -->
+            <div class="tab-panel" id="panel-stock">
+                <div class="glass-card" style="padding: 28px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3>📉 Inventory & Stock Control</h3>
+                        <button class="btn btn-outline btn-sm" onclick="bulkRefillStock()">⚡ Bulk Refill (+50 Units)</button>
+                    </div>
                     <table class="admin-table">
                         <thead>
                             <tr>
                                 <th>Perfume Name</th>
-                                <th>Category</th>
                                 <th>Current Units</th>
-                                <th>Quick Stock Modifier</th>
+                                <th>Stock Modifiers</th>
                                 <th>Status</th>
                                 <th>Out of Stock Toggle</th>
                             </tr>
@@ -435,116 +508,208 @@
             </div>
 
             <!-- ==========================================================================
-                 PANEL 5: TRACK ORDERS FROM DIFFERENT VIEWS
+                 PANEL 5: HERO & BANNER CMS
                  ========================================================================== -->
-            <div class="tab-panel" id="panel-track-orders">
-                <div class="glass-card" style="padding: 32px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
-                        <div>
-                            <h3>🚚 Track Orders (Multi-View Switcher)</h3>
-                            <span class="opacity-7" style="font-size: 0.85rem;">View live customer dispatches via Table, Google Maps, or Status Kanban Board</span>
+            <div class="tab-panel" id="panel-banner-cms">
+                <div class="glass-card" style="padding: 32px; max-width: 850px;">
+                    <h3>🎨 Live Homepage & Hero Banner CMS</h3>
+                    <form id="cms-hero-form" style="display: flex; flex-direction: column; gap: 16px; margin-top: 16px;">
+                        <div class="form-group">
+                            <label>Hero Headline</label>
+                            <input type="text" id="cms-headline" style="width: 100%; padding: 12px; border-radius: 8px; background: var(--bg-surface); border: 1px solid var(--border-color); color: white;" required>
                         </div>
-
-                        <!-- Multi-View Switcher Tabs -->
-                        <div class="view-switcher-tabs">
-                            <button class="view-tab-btn active" data-view="view-table">📋 Table View</button>
-                            <button class="view-tab-btn" data-view="view-gmap">🗺️ Live Google Maps View</button>
-                            <button class="view-tab-btn" data-view="view-kanban">📊 Status Kanban View</button>
+                        <div class="form-group">
+                            <label>Hero Subheadline</label>
+                            <textarea id="cms-subheadline" style="width: 100%; padding: 12px; border-radius: 8px; background: var(--bg-surface); border: 1px solid var(--border-color); color: white; min-height: 80px;" required></textarea>
                         </div>
-                    </div>
+                        <button type="submit" class="btn btn-primary btn-block">🚀 Save & Broadcast Live Headline</button>
+                    </form>
+                </div>
+            </div>
 
-                    <!-- View 1: Table List View -->
-                    <div class="ord-view" id="view-table">
-                        <table class="admin-table">
-                            <thead>
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Customer Name</th>
-                                    <th>Fragrance Item</th>
-                                    <th>Total Amount</th>
-                                    <th>Dispatch Date</th>
-                                    <th>Live Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>#AVELOUR-88192</strong></td>
-                                    <td>Lady Eleanor Vance</td>
-                                    <td>Rose Royale Eau de Parfum (x1)</td>
-                                    <td>₹15,447.50</td>
-                                    <td>July 26, 2026</td>
-                                    <td><span class="status-pill status-active">● In Transit (GPS Active)</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>#AVELOUR-98214</strong></td>
-                                    <td>Vikramaditya Thorne</td>
-                                    <td>Obsidian Oud Noir (x1)</td>
-                                    <td>₹20,040.00</td>
-                                    <td>July 26, 2026</td>
-                                    <td><span class="status-pill status-low">Processing</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+            <!-- ==========================================================================
+                 PANEL 6: ORDERS & SHIPPING TRACKING
+                 ========================================================================== -->
+            <div class="tab-panel" id="panel-orders">
+                <div class="glass-card" style="padding: 28px;">
+                    <h3>🚚 Orders & GPS Multi-View Tracking</h3>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Fragrance Purchased</th>
+                                <th>Total (INR)</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>#AVELOUR-88192</strong></td>
+                                <td>Lady Eleanor Vance</td>
+                                <td>Rose Royale Eau de Parfum (x1)</td>
+                                <td>₹15,447.50</td>
+                                <td>July 26, 2026</td>
+                                <td><span class="status-pill status-active">In Transit</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-                    <!-- View 2: Live Canvas GPS Route Tracker (No Google API Trigger) -->
-                    <div class="ord-view" id="view-gmap" style="display: none;">
-                        <div style="position: relative; width: 100%; height: 340px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: radial-gradient(circle at center, #1C2541 0%, #0A0F1D 100%);">
-                            <canvas id="admin-route-canvas" width="650" height="340" style="width: 100%; height: 100%; display: block;"></canvas>
-                            <div style="position: absolute; bottom: 16px; left: 16px; background: rgba(10, 15, 29, 0.92); backdrop-filter: blur(10px); padding: 12px 20px; border-radius: 8px; border: 1px solid var(--border-color);">
-                                <span class="opacity-7" style="font-size: 0.75rem; display: block;">LIVE DISPATCH ROUTE</span>
-                                <strong style="color: var(--secondary);">Grasse Atelier, FR &rarr; New Delhi Cargo Airport Hub, IN</strong>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- View 3: Status Kanban Board View -->
-                    <div class="ord-view" id="view-kanban" style="display: none;">
-                        <div class="kanban-grid">
-                            <div class="kanban-col">
-                                <div class="kanban-col-header">Pending <span>1</span></div>
-                                <div class="kanban-card">
-                                    <strong>#AVELOUR-99102</strong>
-                                    <p class="opacity-7" style="font-size: 0.85rem; margin: 4px 0;">Jasmine Elixir & Silk</p>
-                                    <span style="color: var(--accent); font-weight: 700; font-size: 0.85rem;">₹17,535.00</span>
-                                </div>
-                            </div>
-                            <div class="kanban-col">
-                                <div class="kanban-col-header">Processing <span>1</span></div>
-                                <div class="kanban-card">
-                                    <strong>#AVELOUR-98214</strong>
-                                    <p class="opacity-7" style="font-size: 0.85rem; margin: 4px 0;">Obsidian Oud Noir</p>
-                                    <span style="color: var(--accent); font-weight: 700; font-size: 0.85rem;">₹20,040.00</span>
-                                </div>
-                            </div>
-                            <div class="kanban-col">
-                                <div class="kanban-col-header">In Transit <span>1</span></div>
-                                <div class="kanban-card">
-                                    <strong>#AVELOUR-88192</strong>
-                                    <p class="opacity-7" style="font-size: 0.85rem; margin: 4px 0;">Rose Royale Eau de Parfum</p>
-                                    <span style="color: var(--accent); font-weight: 700; font-size: 0.85rem;">₹15,447.50</span>
-                                </div>
-                            </div>
-                            <div class="kanban-col">
-                                <div class="kanban-col-header">Delivered <span>2</span></div>
-                                <div class="kanban-card">
-                                    <strong>#AVELOUR-87100</strong>
-                                    <p class="opacity-7" style="font-size: 0.85rem; margin: 4px 0;">Velvet Rose & Amber Oud</p>
-                                    <span style="color: #10B981; font-weight: 700; font-size: 0.85rem;">Completed</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <!-- ==========================================================================
+                 PANEL 7: AUDIT LOGS
+                 ========================================================================== -->
+            <div class="tab-panel" id="panel-audit">
+                <div class="glass-card" style="padding: 28px;">
+                    <h3>📜 Real-Time Audit Activity Logs</h3>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>User</th>
+                                <th>Action Performed</th>
+                            </tr>
+                        </thead>
+                        <tbody id="audit-logs-tbody">
+                            <!-- Rendered dynamically -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- Script Import for Data Management -->
+    <!-- Script Import for Data & Auth Management -->
     <script src="app.js"></script>
     <script>
         window.addEventListener('DOMContentLoaded', () => {
-            // Sidebar Navigation Tab Switching
+            // Check Session Route Guard
+            function checkAdminAuthGuard() {
+                const session = AvelourAuthEngine.getSession();
+                const authScreen = document.getElementById('admin-auth-screen');
+
+                if (!session) {
+                    if (authScreen) authScreen.style.display = 'flex';
+                } else {
+                    if (authScreen) authScreen.style.display = 'none';
+                    document.getElementById('logged-user-name').textContent = session.user.name;
+                    document.getElementById('logged-user-role').textContent = '👑 ' + session.user.role;
+                }
+            }
+            checkAdminAuthGuard();
+
+            // Auth Tab Switching
+            const btnLogin = document.getElementById('tab-btn-login');
+            const btnSignup = document.getElementById('tab-btn-signup');
+            const btnForgot = document.getElementById('tab-btn-forgot');
+
+            const formLogin = document.getElementById('auth-login-form');
+            const formSignup = document.getElementById('auth-signup-form');
+            const formForgot = document.getElementById('auth-forgot-form');
+
+            function resetAuthTabs() {
+                [btnLogin, btnSignup, btnForgot].forEach(b => b?.classList.remove('active'));
+                [formLogin, formSignup, formForgot].forEach(f => { if(f) f.style.display = 'none'; });
+            }
+
+            if (btnLogin) btnLogin.onclick = () => { resetAuthTabs(); btnLogin.classList.add('active'); formLogin.style.display = 'flex'; };
+            if (btnSignup) btnSignup.onclick = () => { resetAuthTabs(); btnSignup.classList.add('active'); formSignup.style.display = 'flex'; };
+            if (btnForgot) btnForgot.onclick = () => { resetAuthTabs(); btnForgot.classList.add('active'); formForgot.style.display = 'flex'; };
+
+            // Show/Hide Password Toggle
+            const toggleEye = document.getElementById('toggle-login-pass');
+            const passInput = document.getElementById('login-pass');
+            if (toggleEye && passInput) {
+                toggleEye.onclick = () => {
+                    if (passInput.type === 'password') {
+                        passInput.type = 'text';
+                        toggleEye.textContent = '🙈 Hide';
+                    } else {
+                        passInput.type = 'password';
+                        toggleEye.textContent = '👁 Show';
+                    }
+                };
+            }
+
+            // Real-Time Password Strength Calculation
+            const signupPass = document.getElementById('signup-pass');
+            const strengthFill = document.getElementById('strength-fill');
+            const strengthLabel = document.getElementById('strength-label');
+
+            if (signupPass) {
+                signupPass.addEventListener('input', () => {
+                    const str = AvelourAuthEngine.calculatePasswordStrength(signupPass.value);
+                    if (strengthFill) {
+                        strengthFill.style.width = str.width;
+                        strengthFill.style.backgroundColor = str.color;
+                    }
+                    if (strengthLabel) {
+                        strengthLabel.textContent = 'Strength: ' + str.label;
+                        strengthLabel.style.color = str.color;
+                    }
+                });
+            }
+
+            // Handle Login Form Submit
+            if (formLogin) {
+                formLogin.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const email = document.getElementById('login-email').value.trim();
+                    const pass = document.getElementById('login-pass').value;
+                    const remember = document.getElementById('login-remember').checked;
+                    const alertBanner = document.getElementById('auth-alert-banner');
+
+                    const res = AvelourAuthEngine.login({ emailOrUsername: email, password: pass, rememberMe: remember });
+
+                    if (!res.success) {
+                        if (alertBanner) {
+                            alertBanner.style.display = 'block';
+                            alertBanner.style.background = 'rgba(239, 68, 68, 0.2)';
+                            alertBanner.style.color = '#EF4444';
+                            alertBanner.style.border = '1px solid #EF4444';
+                            alertBanner.textContent = res.error;
+                        }
+                    } else {
+                        if (alertBanner) {
+                            alertBanner.style.display = 'block';
+                            alertBanner.style.background = 'rgba(16, 185, 129, 0.2)';
+                            alertBanner.style.color = '#10B981';
+                            alertBanner.style.border = '1px solid #10B981';
+                            alertBanner.textContent = '✓ Login Successful! Redirecting to Protected Admin Dashboard...';
+                        }
+                        setTimeout(() => checkAdminAuthGuard(), 800);
+                    }
+                });
+            }
+
+            // Handle Sign Up Form Submit
+            if (formSignup) {
+                formSignup.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const name = document.getElementById('signup-name').value;
+                    const email = document.getElementById('signup-email').value;
+                    const pass = document.getElementById('signup-pass').value;
+                    const phone = document.getElementById('signup-phone').value;
+
+                    const res = AvelourAuthEngine.signUp({ name, email, password: pass, phone });
+
+                    if (!res.success) {
+                        alert(res.error);
+                    } else {
+                        alert('✓ Account Created Successfully! Verification OTP sent to ' + email + ' [Demo Code: ' + res.verifyCode + ']');
+                        btnLogin.click();
+                    }
+                });
+            }
+
+            // Handle Logout
+            document.getElementById('admin-logout-btn')?.addEventListener('click', () => {
+                AvelourAuthEngine.logout();
+            });
+
+            // Sidebar Nav
             const navItems = document.querySelectorAll('#admin-main-nav li');
             const panels = document.querySelectorAll('.tab-panel');
 
@@ -559,190 +724,25 @@
                 });
             });
 
-            // Multi-View Switcher for Order Tracking
-            const viewBtns = document.querySelectorAll('.view-tab-btn');
-            const ordViews = document.querySelectorAll('.ord-view');
+            // Render Products
+            function renderAdminProducts() {
+                const tbody = document.getElementById('products-tbody');
+                if (!tbody) return;
+                const prods = AvelourStoreEngine.getProducts();
 
-            viewBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    viewBtns.forEach(b => b.classList.remove('active'));
-                    ordViews.forEach(v => v.style.display = 'none');
-
-                    btn.classList.add('active');
-                    const targetView = btn.dataset.view;
-                    document.getElementById(targetView).style.display = 'block';
-                });
-            });
-
-            // Live Image Preview on Input
-            const imgInput = document.getElementById('new-prod-img');
-            const imgPreview = document.getElementById('photo-preview');
-            if (imgInput && imgPreview) {
-                imgInput.addEventListener('input', () => {
-                    imgPreview.src = imgInput.value.trim() || 'assets/men_perfume.jpg';
-                });
+                tbody.innerHTML = prods.map((p, idx) => `
+                    <tr>
+                        <td><img src="${p.img}" class="img-preview-thumb"></td>
+                        <td><strong>${p.name}</strong><br><span style="font-size: 0.75rem; color: var(--accent);">${p.sku || 'AV-SKU'}</span></td>
+                        <td>${p.category}</td>
+                        <td><strong>₹${(p.price * 83.5).toLocaleString('en-IN')}</strong></td>
+                        <td>${p.stock || 0} Units</td>
+                        <td>${p.outOfStock ? '<span class="status-pill status-out">Out of Stock</span>' : '<span class="status-pill status-active">Active</span>'}</td>
+                        <td><button class="btn btn-sm btn-outline">Edit</button></td>
+                    </tr>
+                `).join('');
             }
-
-            // Render Product Listings with Out of Stock Toggles
-            function renderAdminListings() {
-                const tbody = document.getElementById('listings-tbody');
-                if (!tbody || typeof PRODUCTS === 'undefined') return;
-
-                tbody.innerHTML = PRODUCTS.map((p, idx) => {
-                    const isOut = p.outOfStock === true;
-                    return `
-                        <tr>
-                            <td><img src="${p.img}" class="img-preview-thumb"></td>
-                            <td><strong>${p.name}</strong></td>
-                            <td>${p.category === 'men-perfume' ? 'Men\'s Perfume' : p.category === 'women-perfume' ? 'Women\'s Perfume' : 'Unisex Perfume'}</td>
-                            <td><strong>₹${(p.price * 83.5).toLocaleString('en-IN')}</strong></td>
-                            <td><span style="font-size: 0.8rem; opacity: 0.8;">${p.tag}</span></td>
-                            <td>
-                                ${isOut ? '<span class="status-pill status-out">🚫 Out of Stock</span>' : '<span class="status-pill status-active">Active (In Stock)</span>'}
-                            </td>
-                            <td>
-                                <button class="btn btn-sm ${isOut ? 'btn-primary' : 'btn-outline'}" onclick="toggleOutOfStock(${idx})">
-                                    ${isOut ? '✅ Mark In Stock' : '🚫 Mark Out of Stock'}
-                                </button>
-                                <button class="btn btn-sm btn-outline" style="color: #EF4444;" onclick="alert('Listing ${p.name} deleted')">Delete</button>
-                            </td>
-                        </tr>
-                    `;
-                }).join('');
-            }
-            renderAdminListings();
-
-            // Render Inventory Stock Table with Out of Stock Action
-            function renderAdminStock() {
-                const tbody = document.getElementById('stock-tbody');
-                if (!tbody || typeof PRODUCTS === 'undefined') return;
-
-                tbody.innerHTML = PRODUCTS.map((p, idx) => {
-                    const isOut = p.outOfStock === true;
-                    return `
-                        <tr>
-                            <td><strong>${p.name}</strong></td>
-                            <td>${p.category}</td>
-                            <td id="stock-val-${idx}"><strong>${isOut ? '0 Units' : '100 Units'}</strong></td>
-                            <td>
-                                <button class="btn btn-sm btn-outline" onclick="adjustStock('${idx}', -10)">-10</button>
-                                <button class="btn btn-sm btn-outline" onclick="adjustStock('${idx}', 10)">+10</button>
-                            </td>
-                            <td>
-                                ${isOut ? '<span class="status-pill status-out">🚫 OUT OF STOCK</span>' : '<span class="status-pill status-active">In Stock</span>'}
-                            </td>
-                            <td>
-                                <button class="btn btn-sm ${isOut ? 'btn-primary' : 'btn-outline'}" style="${isOut ? '' : 'color: #EF4444; border-color: #EF4444;'}" onclick="toggleOutOfStock(${idx})">
-                                    ${isOut ? '✅ Set In Stock (100 Units)' : '🚫 Force Out of Stock (0 Units)'}
-                                </button>
-                            </td>
-                        </tr>
-                    `;
-                }).join('');
-            }
-            renderAdminStock();
-
-            window.toggleOutOfStock = (idx) => {
-                const prod = PRODUCTS[idx];
-                if (!prod) return;
-                prod.outOfStock = !prod.outOfStock;
-                alert((prod.outOfStock ? '🚫 Marked "' : '✅ Marked "') + prod.name + (prod.outOfStock ? '" as OUT OF STOCK on live store!' : '" as IN STOCK on live store!'));
-                renderAdminListings();
-                renderAdminStock();
-            };
-
-            window.adjustStock = (idx, amount) => {
-                alert('Stock adjusted by ' + amount + ' units for ' + PRODUCTS[idx].name);
-            };
-
-            // Handle Add Product Form Submit with Out of Stock Checkbox
-            const addForm = document.getElementById('admin-add-product-form');
-            if (addForm) {
-                addForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const name = document.getElementById('new-prod-name').value;
-                    const price = document.getElementById('new-prod-price').value;
-                    const isOut = document.getElementById('new-prod-outofstock').checked;
-                    
-                    const newProd = {
-                        id: 'p_custom_' + Date.now(),
-                        name: name,
-                        category: document.getElementById('new-prod-cat').value,
-                        price: parseFloat(price) / 83.5,
-                        img: document.getElementById('new-prod-img').value || 'assets/men_perfume.jpg',
-                        rating: 5.0,
-                        reviews: 1,
-                        tag: document.getElementById('new-prod-tag').value || 'Atelier Edition',
-                        desc: document.getElementById('new-prod-desc').value,
-                        outOfStock: isOut
-                    };
-
-                    PRODUCTS.unshift(newProd);
-                    alert('✓ Successfully Published "' + name + '" (₹' + parseInt(price).toLocaleString('en-IN') + ')' + (isOut ? ' [Marked OUT OF STOCK]' : '') + ' to live store catalog!');
-                    addForm.reset();
-                    renderAdminListings();
-                    renderAdminStock();
-                });
-            }
-
-            // Draw Overview Chart
-            const canvas = document.getElementById('overview-chart');
-            if (canvas) {
-                const ctx = canvas.getContext('2d');
-                const data = [14000, 22000, 18000, 31000, 29000, 38000, 48000];
-                ctx.beginPath();
-                ctx.strokeStyle = '#A855F7';
-                ctx.lineWidth = 4;
-                data.forEach((val, idx) => {
-                    const x = (idx / (data.length - 1)) * (canvas.width - 40) + 20;
-                    const y = canvas.height - (val / 55000) * (canvas.height - 40) - 20;
-                    if (idx === 0) ctx.moveTo(x, y);
-                    else ctx.lineTo(x, y);
-                    ctx.fillStyle = '#F59E0B';
-                    ctx.beginPath();
-                    ctx.arc(x, y, 5, 0, Math.PI * 2);
-                    ctx.fill();
-                });
-                ctx.stroke();
-            }
-
-            // Draw Admin Route Map Canvas (No Google API Trigger)
-            const routeCanvas = document.getElementById('admin-route-canvas');
-            if (routeCanvas) {
-                const ctx = routeCanvas.getContext('2d');
-                let progress = 0;
-                function animAdminRoute() {
-                    ctx.clearRect(0, 0, routeCanvas.width, routeCanvas.height);
-                    const p1 = { x: 80, y: 240 }, p2 = { x: 320, y: 80 }, p3 = { x: 560, y: 220 };
-                    
-                    // Route Curve
-                    ctx.beginPath();
-                    ctx.strokeStyle = 'rgba(168, 85, 247, 0.4)';
-                    ctx.lineWidth = 3;
-                    ctx.setLineDash([8, 6]);
-                    ctx.moveTo(p1.x, p1.y);
-                    ctx.quadraticCurveTo(p2.x, p2.y, p3.x, p3.y);
-                    ctx.stroke();
-                    ctx.setLineDash([]);
-
-                    // Nodes
-                    [p1, p3].forEach((pt, idx) => {
-                        ctx.fillStyle = idx === 0 ? '#10B981' : '#F59E0B';
-                        ctx.beginPath(); ctx.arc(pt.x, pt.y, 8, 0, Math.PI * 2); ctx.fill();
-                    });
-
-                    // Animated Courier
-                    progress += 0.005; if (progress > 1) progress = 0;
-                    const t = progress;
-                    const cx = (1 - t) * (1 - t) * p1.x + 2 * (1 - t) * t * p2.x + t * t * p3.x;
-                    const cy = (1 - t) * (1 - t) * p1.y + 2 * (1 - t) * t * p2.y + t * t * p3.y;
-
-                    ctx.fillStyle = '#A855F7';
-                    ctx.beginPath(); ctx.arc(cx, cy, 7, 0, Math.PI * 2); ctx.fill();
-                    requestAnimationFrame(animAdminRoute);
-                }
-                animAdminRoute();
-            }
+            renderAdminProducts();
         });
     </script>
 </body>

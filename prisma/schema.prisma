@@ -1,0 +1,166 @@
+// AVELOUR (bloomora.global) - PRISMA DATABASE SCHEMA FOR POSTGRESQL
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  STAFF
+  CUSTOMER
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  IN_TRANSIT
+  DELIVERED
+  CANCELLED
+}
+
+model User {
+  id            String         @id @default(uuid())
+  name          String
+  email         String         @unique
+  username      String         @unique
+  passwordHash  String
+  phone         String?
+  role          Role           @default(ADMIN)
+  isVerified    Boolean        @default(true)
+  twoFactor     Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  sessions      Session[]
+  resetTokens   PasswordResetToken[]
+  auditLogs     AuditLog[]
+  orders        Order[]
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  sessionToken String   @unique
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+}
+
+model PasswordResetToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model Category {
+  id          String    @id @default(uuid())
+  slug        String    @unique
+  name        String
+  icon        String?
+  img         String?
+  description String?
+  displayOrder Int      @default(1)
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Product {
+  id           String     @id @default(uuid())
+  sku          String     @unique
+  name         String
+  brand        String     @default("Avelour Atelier")
+  price        Float
+  discount     Float      @default(0)
+  stock        Int        @default(100)
+  outOfStock   Boolean    @default(false)
+  img          String
+  rating       Float      @default(5.0)
+  reviewsCount Int        @default(0)
+  tag          String
+  notes        String?
+  description  String
+  gender       String     @default("Unisex")
+  isFeatured   Boolean    @default(false)
+  isBestseller Boolean    @default(false)
+  isNew        Boolean    @default(false)
+  categoryId   String
+  category     Category   @relation(fields: [categoryId], references: [id])
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  reviews      Review[]
+}
+
+model Order {
+  id          String      @id @default(uuid())
+  orderNumber String      @unique
+  userId      String?
+  user        User?       @relation(fields: [userId], references: [id])
+  totalAmount Float
+  currency    String      @default("INR")
+  status      OrderStatus @default(PENDING)
+  trackingGps String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Coupon {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  discount    Float
+  type        String   @default("percent")
+  expiryDate  DateTime
+  maxUses     Int      @default(1000)
+  currentUses Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model Blog {
+  id        String   @id @default(uuid())
+  title     String
+  author    String   @default("Antoine de Bloomora")
+  category  String
+  img       String
+  excerpt   String
+  content   String
+  seoTitle  String?
+  seoDesc   String?
+  createdAt DateTime @default(now())
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  author    String
+  rating    Int
+  title     String
+  comment   String
+  status    String   @default("approved")
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  userName  String
+  role      String
+  action    String
+  createdAt DateTime @default(now())
+}
+
+model Setting {
+  id           String   @id @default(uuid())
+  key          String   @unique
+  value        String
+  updatedAt    DateTime @updatedAt
+}

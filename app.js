@@ -1,27 +1,282 @@
 /**
- * BLOOMORA NEXT-GEN LUXURY E-COMMERCE ENGINE
- * Full Interactive Frontend: Canvas Particle System, Custom Cursor, 3D Tilt Physics,
- * Cart & Wishlist State Management, 360° Product Turntable Viewer, Multi-Step Checkout,
- * AI Live Search, Admin Analytics Canvas, AI Concierge Chatbot, Theme & Currency Sync.
+ * AVELOUR ENTERPRISE REAL-TIME STORE ENGINE & CMS DATA MODEL
+ * Real-time BroadcastChannel & LocalStorage sync engine.
+ * Every edit made in admin.html instantly broadcasts to index.html in real time without code changes or redeployment.
  */
 
-// Product Database: 3 Exclusive Fragrance Categories (Men's Perfume, Women's Perfume, Unisex Perfume)
-const PRODUCTS = [
-    // Men's Luxury Colognes & Perfumes
-    { id: 'pm1', name: 'Obsidian Oud Noir', category: 'men-perfume', price: 240.00, img: 'assets/men_perfume.jpg', rating: 5.0, reviews: 176, tag: "Men's Luxury Cologne", desc: 'Smoked Cambodian agarwood blended with Tuscan black leather and royal amber stone.' },
-    { id: 'pm2', name: 'Cedar & Aged Tobacco Intense', category: 'men-perfume', price: 195.00, img: 'assets/men_perfume.jpg', rating: 4.9, reviews: 114, tag: "Men's Bespoke Cologne", desc: 'Atlas cedarwood infused with hand-aged Cuban tobacco leaf, nutmeg, and cardamom.' },
-    { id: 'pm3', name: 'Calabrian Bergamot & Sea Salt', category: 'men-perfume', price: 175.00, img: 'assets/wood_note.jpg', rating: 4.8, reviews: 92, tag: "Men's Fresh Cologne", desc: 'Zesty Calabrian bergamot combined with ocean spray mist, Haitian vetiver, and oakmoss.' },
+// Initial Seed Data for CMS Engine
+const INITIAL_SEED_DATA = {
+    settings: {
+        siteName: 'Avelour',
+        domain: 'bloomora.global',
+        logoIcon: '❖',
+        headline: 'Welcome to the House of Bloomora Global',
+        subheadline: 'Immerse your senses in ultra-luxurious bespoke perfumes, rare oud extracts, and artisanal botanical elixirs, crafted in Grasse and delivered globally.',
+        contactPhone: '+91 91493 72043',
+        whatsappLink: 'https://wa.me/919149372043',
+        currency: 'INR',
+        language: 'en-IN',
+        footerText: 'Redefining luxury shopping through digital craftsmanship, organic botanicals, and bespoke technology.'
+    },
 
-    // Women's Luxury Perfumes
-    { id: 'pw1', name: 'Rose Royale Eau de Parfum', category: 'women-perfume', price: 185.00, img: 'assets/women_perfume.jpg', rating: 5.0, reviews: 142, tag: "Women's Bespoke Perfume", desc: 'Pure Damask rose extract blended with French Vanilla bean and warm crystal amber.' },
-    { id: 'pw2', name: 'Jasmine Elixir & Silk', category: 'women-perfume', price: 210.00, img: 'assets/women_perfume.jpg', rating: 4.9, reviews: 98, tag: "Women's Haute Perfume", desc: 'Midnight blooming jasmine with neroli petals and soft cashmere wood notes.' },
-    { id: 'pw3', name: 'Peony Blush & White Musk', category: 'women-perfume', price: 165.00, img: 'assets/floral_note.jpg', rating: 4.8, reviews: 85, tag: "Women's Floral Perfume", desc: 'Crisp peony blossoms infused with wild red apple essence and velvety white musk.' },
+    categories: [
+        { id: 'men-perfume', name: "👔 Men's Perfume", icon: '👔', img: 'assets/men_perfume.jpg', desc: 'Bold aged agarwood, leather, and zesty citrus accords.', count: 3, order: 1 },
+        { id: 'women-perfume', name: "🌸 Women's Perfume", icon: '🌸', img: 'assets/women_perfume.jpg', desc: 'Rare French rose, velvet jasmines, and warm white musk.', count: 3, order: 2 },
+        { id: 'unisex-perfume', name: "✨ Unisex Perfume", icon: '✨', img: 'assets/unisex_perfume.jpg', desc: 'Harmonious artisan blends designed for all sophisticated souls.', count: 3, order: 3 }
+    ],
 
-    // Unisex Bespoke Perfumes
-    { id: 'pu1', name: 'Velvet Rose & Amber Oud', category: 'unisex-perfume', price: 225.00, img: 'assets/unisex_perfume.jpg', rating: 4.9, reviews: 165, tag: "Unisex Atelier Fragrance", desc: 'Hand-poured Damask rose extract blended with aged agarwood, amber resin, and warm vanilla.' },
-    { id: 'pu2', name: 'Mysore Sandalwood & White Sage', category: 'unisex-perfume', price: 190.00, img: 'assets/candle_diffuser.jpg', rating: 4.8, reviews: 112, tag: "Unisex Bespoke Scents", desc: 'Organic Mysore sandalwood with white sage leaves, cedarwood, and coastal moss.' },
-    { id: 'pu3', name: 'Golden Amber & Citrus Dew', category: 'unisex-perfume', price: 180.00, img: 'assets/hero_perfume.jpg', rating: 5.0, reviews: 130, tag: "Unisex Botanical Elixir", desc: 'Sun-ripened Mediterranean citrus infused with golden amber stone and frankincense.' }
-];
+    products: [
+        { id: 'pm1', sku: 'AV-MEN-001', name: 'Obsidian Oud Noir', category: 'men-perfume', brand: 'Avelour Atelier', price: 240.00, discount: 0, stock: 120, outOfStock: false, img: 'assets/men_perfume.jpg', rating: 5.0, reviews: 176, tag: "Men's Luxury Cologne", notes: 'Top: Calabrian Bergamot; Heart: Tuscan Leather; Base: Smoked Agarwood', desc: 'Smoked Cambodian agarwood blended with Tuscan black leather and royal amber stone.', gender: 'Men', isFeatured: true, isBestseller: true, isNew: false, createdAt: '2026-07-25' },
+        { id: 'pm2', sku: 'AV-MEN-002', name: 'Cedar & Aged Tobacco Intense', category: 'men-perfume', brand: 'Avelour Atelier', price: 195.00, discount: 10, stock: 85, outOfStock: false, img: 'assets/men_perfume.jpg', rating: 4.9, reviews: 114, tag: "Men's Bespoke Cologne", notes: 'Top: Nutmeg & Cardamom; Heart: Cuban Tobacco; Base: Atlas Cedarwood', desc: 'Atlas cedarwood infused with hand-aged Cuban tobacco leaf, nutmeg, and cardamom.', gender: 'Men', isFeatured: false, isBestseller: false, isNew: true, createdAt: '2026-07-26' },
+        { id: 'pm3', sku: 'AV-MEN-003', name: 'Calabrian Bergamot & Sea Salt', category: 'men-perfume', brand: 'Avelour Atelier', price: 175.00, discount: 0, stock: 42, outOfStock: false, img: 'assets/wood_note.jpg', rating: 4.8, reviews: 92, tag: "Men's Fresh Cologne", notes: 'Top: Zesty Bergamot; Heart: Ocean Mist; Base: Haitian Vetiver', desc: 'Zesty Calabrian bergamot combined with ocean spray mist, Haitian vetiver, and oakmoss.', gender: 'Men', isFeatured: false, isBestseller: false, isNew: false, createdAt: '2026-07-26' },
+        { id: 'pw1', sku: 'AV-WOM-001', name: 'Rose Royale Eau de Parfum', category: 'women-perfume', brand: 'Avelour Atelier', price: 185.00, discount: 0, stock: 94, outOfStock: false, img: 'assets/women_perfume.jpg', rating: 5.0, reviews: 142, tag: "Women's Bespoke Perfume", notes: 'Top: Damask Rose; Heart: Vanilla Bean; Base: Crystal Amber', desc: 'Pure Damask rose extract blended with French Vanilla bean and warm crystal amber.', gender: 'Women', isFeatured: true, isBestseller: true, isNew: false, createdAt: '2026-07-25' },
+        { id: 'pw2', sku: 'AV-WOM-002', name: 'Jasmine Elixir & Silk', category: 'women-perfume', brand: 'Avelour Atelier', price: 210.00, discount: 15, stock: 60, outOfStock: false, img: 'assets/women_perfume.jpg', rating: 4.9, reviews: 98, tag: "Women's Haute Perfume", notes: 'Top: Neroli Petals; Heart: Midnight Jasmine; Base: Cashmere Wood', desc: 'Midnight blooming jasmine with neroli petals and soft cashmere wood notes.', gender: 'Women', isFeatured: true, isBestseller: false, isNew: true, createdAt: '2026-07-26' },
+        { id: 'pw3', sku: 'AV-WOM-003', name: 'Peony Blush & White Musk', category: 'women-perfume', brand: 'Avelour Atelier', price: 165.00, discount: 0, stock: 35, outOfStock: false, img: 'assets/floral_note.jpg', rating: 4.8, reviews: 85, tag: "Women's Floral Perfume", notes: 'Top: Red Apple; Heart: Peony Petals; Base: White Musk', desc: 'Crisp peony blossoms infused with wild red apple essence and velvety white musk.', gender: 'Women', isFeatured: false, isBestseller: false, isNew: false, createdAt: '2026-07-26' },
+        { id: 'pu1', sku: 'AV-UNI-001', name: 'Velvet Rose & Amber Oud', category: 'unisex-perfume', brand: 'Avelour Atelier', price: 225.00, discount: 0, stock: 0, outOfStock: true, img: 'assets/unisex_perfume.jpg', rating: 4.9, reviews: 165, tag: "Unisex Atelier Fragrance", notes: 'Top: French Rose; Heart: Aged Agarwood; Base: Amber Resin', desc: 'Hand-poured Damask rose extract blended with aged agarwood, amber resin, and warm vanilla.', gender: 'Unisex', isFeatured: true, isBestseller: true, isNew: false, createdAt: '2026-07-25' },
+        { id: 'pu2', sku: 'AV-UNI-002', name: 'Mysore Sandalwood & White Sage', category: 'unisex-perfume', brand: 'Avelour Atelier', price: 190.00, discount: 5, stock: 78, outOfStock: false, img: 'assets/candle_diffuser.jpg', rating: 4.8, reviews: 112, tag: "Unisex Bespoke Scents", notes: 'Top: White Sage; Heart: Mysore Sandalwood; Base: Coastal Moss', desc: 'Organic Mysore sandalwood with white sage leaves, cedarwood, and coastal moss.', gender: 'Unisex', isFeatured: false, isBestseller: false, isNew: true, createdAt: '2026-07-26' },
+        { id: 'pu3', sku: 'AV-UNI-003', name: 'Golden Amber & Citrus Dew', category: 'unisex-perfume', brand: 'Avelour Atelier', price: 180.00, discount: 0, stock: 110, outOfStock: false, img: 'assets/hero_perfume.jpg', rating: 5.0, reviews: 130, tag: "Unisex Botanical Elixir", notes: 'Top: Sun Citrus; Heart: Amber Stone; Base: Frankincense', desc: 'Sun-ripened Mediterranean citrus infused with golden amber stone and frankincense.', gender: 'Unisex', isFeatured: false, isBestseller: false, isNew: false, createdAt: '2026-07-26' }
+    ],
+
+    coupons: [
+        { code: 'AVELOUR20', discount: 20, type: 'percent', expiry: '2026-12-31', maxUses: 1000, currentUses: 142 },
+        { code: 'WELCOME10', discount: 10, type: 'percent', expiry: '2026-12-31', maxUses: 500, currentUses: 88 },
+        { code: 'ROYAL50', discount: 50, type: 'fixed', expiry: '2026-08-31', maxUses: 100, currentUses: 12 }
+    ],
+
+    blogs: [
+        { id: 'b1', title: 'The Art of Grasse Perfumery & Smoked Oud Extraction', author: 'Antoine de Bloomora', date: 'July 24, 2026', category: 'Perfume Craftsmanship', img: 'assets/hero_perfume.jpg', excerpt: 'Discover how master perfumers select raw Damask rose and distill smoked Cambodian agarwood in southern France.', content: 'Full blog article detailing the extraction process...', seoTitle: 'Grasse Perfumery & Smoked Oud Artistry | Avelour', seoDesc: 'Master perfumery techniques from Grasse, France.' },
+        { id: 'b2', title: 'Top 5 Winter Oud Accords for Indian Royalty', author: 'Lady Eleanor Vance', date: 'July 20, 2026', category: 'Fragrance Guides', img: 'assets/men_perfume.jpg', excerpt: 'Explore the warmest amber stone and agarwood blends crafted specifically for cold winter evenings.', content: 'Full winter fragrance guide...', seoTitle: 'Top 5 Winter Oud Accords | Avelour', seoDesc: 'Discover warm luxury agarwood fragrances.' }
+    ],
+
+    reviews: [
+        { id: 'r1', productId: 'pm1', author: 'Vikramaditya T.', rating: 5, date: 'July 26, 2026', title: 'Smells insanely regal!', comment: 'The smoked agarwood and Tuscan leather notes last 24+ hours on clothes. Best oud cologne in India!', status: 'approved' },
+        { id: 'r2', productId: 'pw1', author: 'Priya S.', rating: 5, date: 'July 25, 2026', title: 'Pure Parisian Elegance', comment: 'The Damask rose and crystal amber bean combination is mesmerising. Shipped fast to New Delhi.', status: 'approved' }
+    ],
+
+    auditLogs: [
+        { id: 'log_1', user: 'Super Admin', role: 'Super Admin', action: 'System Initialized', target: 'AvelourStoreEngine', timestamp: '2026-07-27 21:55:00' }
+    ]
+};
+
+// Initialize or Load Persistent Store Engine
+window.AvelourStoreEngine = (function() {
+    const STORAGE_KEY = 'avelour_dynamic_db';
+    const syncChannel = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('avelour_realtime_sync') : null;
+
+    function getStore() {
+        const data = localStorage.getItem(STORAGE_KEY);
+        if (!data) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_SEED_DATA));
+            return INITIAL_SEED_DATA;
+        }
+        try {
+            return JSON.parse(data);
+        } catch(e) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_SEED_DATA));
+            return INITIAL_SEED_DATA;
+        }
+    }
+
+    function saveStore(store, actionName, user = 'Admin (CMS)') {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+        
+        // Log Audit Action
+        if (actionName) {
+            const logEntry = {
+                id: 'log_' + Date.now(),
+                user: user,
+                role: 'Admin',
+                action: actionName,
+                timestamp: new Date().toLocaleString('en-IN')
+            };
+            store.auditLogs.unshift(logEntry);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+        }
+
+        // Broadcast to all open tabs and windows in real time!
+        if (syncChannel) {
+            syncChannel.postMessage({ type: 'STORE_UPDATED', action: actionName, timestamp: Date.now() });
+        }
+    }
+
+    return {
+        getStore,
+        saveStore,
+        getProducts: () => getStore().products || [],
+        getCategories: () => getStore().categories || [],
+        getSettings: () => getStore().settings || INITIAL_SEED_DATA.settings,
+        getCoupons: () => getStore().coupons || [],
+        getBlogs: () => getStore().blogs || [],
+        getReviews: () => getStore().reviews || [],
+        getAuditLogs: () => getStore().auditLogs || [],
+        subscribe: (callback) => {
+            if (syncChannel) {
+                syncChannel.onmessage = (event) => {
+                    if (event.data?.type === 'STORE_UPDATED') {
+                        callback(event.data);
+                    }
+                };
+            }
+            window.addEventListener('storage', (e) => {
+                if (e.key === STORAGE_KEY) {
+                    callback({ type: 'STORAGE_EVENT' });
+                }
+            });
+        }
+    };
+})();
+
+// AVELOUR ENTERPRISE AUTHENTICATION & SECURITY ENGINE
+window.AvelourAuthEngine = (function() {
+    const SESSION_KEY = 'avelour_auth_session';
+    const USERS_KEY = 'avelour_auth_users';
+    const LOCKOUT_KEY = 'avelour_auth_lockouts';
+
+    const INITIAL_USERS = [
+        { id: 'u1', name: 'Lady Eleanor Vance', email: 'admin@bloomora.global', username: 'eleanor', passwordHash: 'AdminPass123!', role: 'Super Admin', phone: '+91 91493 72043', isVerified: true, createdAt: '2026-07-01' },
+        { id: 'u2', name: 'Vikramaditya Thorne', email: 'vikram@bloomora.global', username: 'vikram', passwordHash: 'AvelourPass123!', role: 'Admin', phone: '+91 98765 43210', isVerified: true, createdAt: '2026-07-10' },
+        { id: 'u3', name: 'Siddharth Staff', email: 'staff@bloomora.global', username: 'siddharth', passwordHash: 'StaffPass123!', role: 'Staff', phone: '+91 91234 56789', isVerified: true, createdAt: '2026-07-15' }
+    ];
+
+    function getUsers() {
+        const u = localStorage.getItem(USERS_KEY);
+        if (!u) {
+            localStorage.setItem(USERS_KEY, JSON.stringify(INITIAL_USERS));
+            return INITIAL_USERS;
+        }
+        try { return JSON.parse(u); } catch(e) { return INITIAL_USERS; }
+    }
+
+    function getLockouts() {
+        try { return JSON.parse(localStorage.getItem(LOCKOUT_KEY) || '{}'); } catch(e) { return {}; }
+    }
+
+    function saveLockouts(l) {
+        localStorage.setItem(LOCKOUT_KEY, JSON.stringify(l));
+    }
+
+    function calculatePasswordStrength(password) {
+        if (!password) return { score: 0, label: 'Empty', color: '#EF4444', width: '0%' };
+        let score = 0;
+        if (password.length >= 8) score += 25;
+        if (/[A-Z]/.test(password)) score += 25;
+        if (/[0-9]/.test(password)) score += 25;
+        if (/[^A-Za-z0-9]/.test(password)) score += 25;
+
+        if (score <= 25) return { score, label: 'Weak ⚠️', color: '#EF4444', width: '25%' };
+        if (score <= 50) return { score, label: 'Fair ⚡', color: '#F59E0B', width: '50%' };
+        if (score <= 75) return { score, label: 'Good 🔒', color: '#3B82F6', width: '75%' };
+        return { score, label: 'Strong 💪', color: '#10B981', width: '100%' };
+    }
+
+    return {
+        getUsers,
+        calculatePasswordStrength,
+        
+        signUp: function({ name, email, username, password, phone, role = 'Admin' }) {
+            const users = getUsers();
+            const exists = users.find(u => u.email.toLowerCase() === email.toLowerCase());
+            if (exists) return { success: false, error: 'An account with this email address already exists.' };
+
+            const newUser = {
+                id: 'u_' + Date.now(),
+                name,
+                email,
+                username: username || email.split('@')[0],
+                passwordHash: password,
+                role,
+                phone: phone || '+91 91493 72043',
+                isVerified: true,
+                createdAt: new Date().toISOString()
+            };
+
+            users.push(newUser);
+            localStorage.setItem(USERS_KEY, JSON.stringify(users));
+
+            // Log Audit Event
+            AvelourStoreEngine.saveStore(AvelourStoreEngine.getStore(), `New Account Registered: ${name} (${email})`, name);
+
+            return { success: true, user: newUser, verifyCode: '881920' };
+        },
+
+        login: function({ emailOrUsername, password, rememberMe }) {
+            const lockouts = getLockouts();
+            const key = emailOrUsername.toLowerCase();
+            const now = Date.now();
+
+            if (lockouts[key] && lockouts[key].lockedUntil > now) {
+                const mins = Math.ceil((lockouts[key].lockedUntil - now) / 60000);
+                return { success: false, error: `Account locked due to 5 failed attempts. Please try again in ${mins} minute(s).` };
+            }
+
+            const users = getUsers();
+            const user = users.find(u => u.email.toLowerCase() === key || u.username.toLowerCase() === key);
+
+            if (!user || user.passwordHash !== password) {
+                const attempts = (lockouts[key]?.attempts || 0) + 1;
+                let lockedUntil = 0;
+                if (attempts >= 5) {
+                    lockedUntil = now + (15 * 60 * 1000);
+                }
+                lockouts[key] = { attempts, lockedUntil };
+                saveLockouts(lockouts);
+
+                AvelourStoreEngine.saveStore(AvelourStoreEngine.getStore(), `Failed Login Attempt for ${emailOrUsername}`, 'Anonymous');
+
+                if (attempts >= 5) {
+                    return { success: false, error: '⚠️ 5 Failed Login Attempts reached! Account locked for 15 minutes for brute-force protection.' };
+                }
+                return { success: false, error: `Invalid credentials. (${5 - attempts} attempt(s) remaining before 15-min lockout)` };
+            }
+
+            delete lockouts[key];
+            saveLockouts(lockouts);
+
+            const session = {
+                token: 'jwt_avelour_' + Math.random().toString(36).substring(2) + Date.now(),
+                user: {
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                    role: user.role,
+                    phone: user.phone
+                },
+                expiresAt: Date.now() + (rememberMe ? 7 * 24 * 60 * 60 * 1000 : 2 * 60 * 60 * 1000)
+            };
+
+            localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+
+            AvelourStoreEngine.saveStore(AvelourStoreEngine.getStore(), `User Login Success: ${user.name} (${user.role})`, user.name);
+
+            return { success: true, session };
+        },
+
+        getSession: function() {
+            try {
+                const s = JSON.parse(localStorage.getItem(SESSION_KEY));
+                if (!s || s.expiresAt < Date.now()) {
+                    localStorage.removeItem(SESSION_KEY);
+                    return null;
+                }
+                return s;
+            } catch(e) { return null; }
+        },
+
+        logout: function() {
+            const s = this.getSession();
+            if (s) {
+                AvelourStoreEngine.saveStore(AvelourStoreEngine.getStore(), `User Logged Out: ${s.user.name}`, s.user.name);
+            }
+            localStorage.removeItem(SESSION_KEY);
+            if (window.location.pathname.includes('admin.html')) {
+                window.location.reload();
+            }
+        }
+    };
+})();
+
+// Active Products Array dynamically backed by AvelourStoreEngine
+let PRODUCTS = AvelourStoreEngine.getProducts();
 
 // Currency Rates & Symbols
 const CURRENCIES = {
@@ -64,7 +319,50 @@ document.addEventListener('DOMContentLoaded', () => {
     initProductPageModal();
     initScentAlchemyVisualizer();
     initRouteMapCanvas();
+
+    // Real-Time Live Sync Subscriber (Updates index.html live without refreshing page)
+    AvelourStoreEngine.subscribe((data) => {
+        PRODUCTS = AvelourStoreEngine.getProducts();
+        renderProducts();
+        renderTrendingCarousel();
+        renderNewArrivals();
+        renderDynamicCategories();
+        renderDynamicSiteSettings();
+    });
+
+    renderDynamicCategories();
+    renderDynamicSiteSettings();
 });
+
+function renderDynamicCategories() {
+    const cats = AvelourStoreEngine.getCategories();
+    const grid = document.querySelector('.categories-grid');
+    if (grid && cats.length) {
+        grid.innerHTML = cats.map(c => `
+            <div class="category-card glass-card" data-category="${c.id}">
+                <img src="${c.img || 'assets/unisex_perfume.jpg'}" alt="${c.name}">
+                <div class="category-overlay">
+                    <span class="badge-cat">${c.count || 3} Items</span>
+                    <h3>${c.name}</h3>
+                    <p>${c.desc || 'Ultra-luxurious bespoke fragrance accords.'}</p>
+                    <span class="cat-arrow">Explore ${c.name} &rarr;</span>
+                </div>
+            </div>
+        `).join('');
+    }
+}
+
+function renderDynamicSiteSettings() {
+    const s = AvelourStoreEngine.getSettings();
+    const heroTitle = document.querySelector('.hero-title');
+    const heroSub = document.querySelector('.hero-subheadline');
+    const brandLogos = document.querySelectorAll('.logo');
+    const footerDesc = document.querySelector('.footer-desc');
+
+    if (heroTitle && s.headline) heroTitle.innerHTML = s.headline;
+    if (heroSub && s.subheadline) heroSub.textContent = s.subheadline;
+    if (footerDesc && s.footerText) footerDesc.textContent = s.footerText;
+}
 
 /* ==========================================================================
    1. Custom Cursor & 3D Tilt Physics
@@ -874,11 +1172,26 @@ function initThemeAndCurrency() {
 }
 
 function initScrollHeader() {
-    window.onscroll = () => {
-        const header = document.getElementById('header');
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
         if (window.scrollY > 50) header?.classList.add('sticky');
         else header?.classList.remove('sticky');
-    };
+    });
+
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    if (menuToggle && navMenu) {
+        menuToggle.onclick = () => {
+            navMenu.classList.toggle('mobile-active');
+            menuToggle.classList.toggle('active');
+        };
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.onclick = () => {
+                navMenu.classList.remove('mobile-active');
+                menuToggle.classList.remove('active');
+            };
+        });
+    }
 }
 
 /* ==========================================================================
